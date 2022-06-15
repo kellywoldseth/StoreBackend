@@ -1,0 +1,2 @@
+/*PRODUCTS-TEST-TABLE-DOWN*/
+DROP TABLE products-test;

@@ -1,0 +1,2 @@
+/*ORDERS-TABLE-DOWN*/
+DROP TABLE orders;
