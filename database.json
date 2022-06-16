@@ -5,7 +5,7 @@
         "database": {"ENV": "DEVELOPMENT_POSTGRES_DB"},
         "user": {"ENV": "DEVELOPMENT_POSTGRES_USERNAME"},
         "password": {"ENV": "DEVELOPMENT_POSTGRES_PASSWORD"},
-        "port": "3000"
+        "port": "5432"
     },
     
    "test": {
@@ -14,7 +14,7 @@
         "database": {"ENV": "DEVELOPMENT_POSTGRES_DBTEST"},
         "user": {"ENV": "DEVELOPMENT_POSTGRES_USERNAME"},
         "password": {"ENV": "DEVELOPMENT_POSTGRES_PASSWORD"},
-        "port": "3000"
+        "port": "5432"
     }
 
 }

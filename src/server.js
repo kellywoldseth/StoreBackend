@@ -1,4 +1,5 @@
 "use strict";
+//This file contains starter code that was provided to us by the Udacity staff.
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };

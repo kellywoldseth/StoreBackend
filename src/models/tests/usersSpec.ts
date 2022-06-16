@@ -15,9 +15,6 @@ describe("Testing Users Model", () => {
     it('should have a create method', () =>{
         expect(userInfo.create).toBeDefined();
     });
-
-    /*ERRORS --------------*/
-    
   
     it('create method should add a user', async () =>{
            const newUser = await userInfo.create({

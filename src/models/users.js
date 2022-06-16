@@ -53,6 +53,7 @@ class UserInfo {
             throw new Error(`Could not create new user. Error: ${err}`);
         }
     }
+    //authenticate
     async authenticate(firstName, lastName, password) {
         const conn = await database_1.default.connect();
         const sql = 'SELECT password FROM users WHERE firstName=($1) WHERE lastName=($2)';

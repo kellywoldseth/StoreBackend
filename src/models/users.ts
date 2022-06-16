@@ -32,7 +32,7 @@ export class UserInfo{
    }
 
     //show
-    async show(id:string):Promise<User[]> 
+    async show(id:string):Promise<User> 
     {
         try
         {
@@ -50,7 +50,7 @@ export class UserInfo{
     }
 
     //create
-    async create(u: User):Promise<User[]> 
+    async create(u: User):Promise<User> 
     {
         try
         {
