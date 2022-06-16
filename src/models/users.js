@@ -6,6 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserInfo = void 0;
 //@ts-ignore
 const database_1 = __importDefault(require("../database"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const pepper = process.env.BCRYPT_PASSWOORD;
+//exclamation point on next line assures TypeScript that this variable is not null (it's defined in .env)
+//This fixes  the problem when creating the hash that saltRounds is not type string because it is string or undefined
+const saltRounds = process.env.SALT_ROUNDS;
 class UserInfo {
     //index
     async index() {
@@ -36,19 +41,30 @@ class UserInfo {
         }
     }
     //create
-    //NEEDS HASHING ON PASSWORD
     async create(u) {
         try {
             //@ts-ignore
             const conn = await database_1.default.connect();
             const sql = 'INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING *';
-            const result = await conn.query(sql, [u.firstName, u.lastName, u.password]);
+            const hash = bcrypt_1.default.hashSync(u.password + pepper, parseInt(saltRounds));
+            const result = await conn.query(sql, [u.firstName, u.lastName, hash]);
             conn.release();
             return result.rows[0];
         }
         catch (err) {
             throw new Error(`Could not create new user. Error: ${err}`);
         }
+    }
+    async authenticate(firstName, lastName, password) {
+        const conn = await database_1.default.connect();
+        const sql = 'SELECT password FROM users WHERE firstName=($1) WHERE lastName=($2)';
+        const result = await conn.query(sql, [firstName, lastName]);
+        if (result.rows.length) {
+            const user = result.rows[0];
+            if (bcrypt_1.default.compareSync(password + pepper, user.password))
+                return user;
+        }
+        return null;
     }
 }
 exports.UserInfo = UserInfo;

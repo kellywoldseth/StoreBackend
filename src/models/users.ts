@@ -1,5 +1,7 @@
 //@ts-ignore
 import client from '../database'
+import bcrypt from 'bcrypt'
+import { isParameterPropertyDeclaration } from 'typescript';
 
 export type User = {
  id: string;
@@ -8,6 +10,8 @@ export type User = {
  password: string;
 }
 
+const pepper = process.env.BCRYPT_PASSWOORD || '';
+const salt = process.env.SALT_ROUNDS || ''; 
 export class UserInfo{
    
     //index
@@ -47,7 +51,6 @@ export class UserInfo{
     }
 
     //create
-    //NEEDS HASHING ON PASSWORD
     async create(u: User):Promise<User[]> 
     {
         try
@@ -55,7 +58,10 @@ export class UserInfo{
          //@ts-ignore
          const conn = await client.connect()
          const sql = 'INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING *'
-         const result = await conn.query(sql, [u.firstName, u.lastName, u.password])
+         
+         
+         const hash = bcrypt.hashSync(u.password + pepper, parseInt(salt));
+         const result = await conn.query(sql, [u.firstName, u.lastName, hash])
          conn.release()
          return result.rows[0]
         }
@@ -63,6 +69,19 @@ export class UserInfo{
         {
          throw new Error(`Could not create new user. Error: ${err}`)
         }
+    }
+
+    async authenticate(firstName: string, lastName: string, password: string): Promise<User | null> {
+        const conn = await client.connect()
+        const sql = 'SELECT password FROM users WHERE firstName=($1) WHERE lastName=($2)'
+        const result = await conn.query(sql, [firstName, lastName])
+        if(result.rows.length)
+        {
+            const user = result.rows[0]
+            if(bcrypt.compareSync(password+pepper, user.password))
+                return user
+        }
+        return null
     }
 
 }
