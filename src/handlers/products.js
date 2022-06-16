@@ -17,6 +17,7 @@ const show = async (_req, res) => {
 /*ERROR---- IT WANTS PRODUCT TO HAVE AN ID*/
 const create = async (_req, res) => {
     const product = {
+        id: _req.body.id,
         name: _req.body.name,
         price: _req.body.price,
         category: _req.body.category,
@@ -33,9 +34,9 @@ const create = async (_req, res) => {
 };
 const verifyAuthToken = (_req, res, next) => {
     try {
-        const authorizationHeader = _req.headers.authorization;
+        const authorizationHeader = _req.headers.authorization || '';
         const token = authorizationHeader.split(' ')[1];
-        const decoded = jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
+        jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
         next();
     }
     catch (error) {

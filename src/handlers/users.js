@@ -15,9 +15,9 @@ const show = async (_req, res) => {
     res.json(user);
 };
 /*ERROR---- IT WANTS USER TO HAVE AN ID*/
-/*PASSWORD HASHING*/
 const create = async (_req, res) => {
     const user = {
+        id: _req.body.id,
         firstName: _req.body.firstName,
         lastName: _req.body.lastName,
         password: _req.body.password,
@@ -34,6 +34,7 @@ const create = async (_req, res) => {
 };
 const authenticate = async (_req, res) => {
     const user = {
+        id: _req.body.id,
         firstName: _req.body.firstName,
         lastName: _req.body.lastName,
         password: _req.body.password,

@@ -7,10 +7,8 @@ exports.UserInfo = void 0;
 //@ts-ignore
 const database_1 = __importDefault(require("../database"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const pepper = process.env.BCRYPT_PASSWOORD;
-//exclamation point on next line assures TypeScript that this variable is not null (it's defined in .env)
-//This fixes  the problem when creating the hash that saltRounds is not type string because it is string or undefined
-const saltRounds = process.env.SALT_ROUNDS;
+const pepper = process.env.BCRYPT_PASSWOORD || '';
+const salt = process.env.SALT_ROUNDS || '';
 class UserInfo {
     //index
     async index() {
@@ -46,7 +44,7 @@ class UserInfo {
             //@ts-ignore
             const conn = await database_1.default.connect();
             const sql = 'INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING *';
-            const hash = bcrypt_1.default.hashSync(u.password + pepper, parseInt(saltRounds));
+            const hash = bcrypt_1.default.hashSync(u.password + pepper, parseInt(salt));
             const result = await conn.query(sql, [u.firstName, u.lastName, hash]);
             conn.release();
             return result.rows[0];

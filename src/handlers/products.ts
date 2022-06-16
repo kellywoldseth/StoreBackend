@@ -21,6 +21,7 @@ res.json(product)
 const create = async (_req: Request, res: Response) => 
 {
     const product: Product = {
+        id: _req.body.id,
         name: _req.body.name,
         price: _req.body.price,
         category: _req.body.category,
@@ -37,11 +38,12 @@ const create = async (_req: Request, res: Response) =>
 
 }
 
-const verifyAuthToken = (_req: Request, res: Response, next) => {
+const verifyAuthToken = (_req: Request, res: Response, next: any) => {
+    
     try {
         const authorizationHeader: string = _req.headers.authorization || ''
         const token:string = authorizationHeader.split(' ')[1]
-        const decoded: string = jwt.verify(token, process.env.TOKEN_SECRET as jwt.Secret)
+        jwt.verify(token, process.env.TOKEN_SECRET as jwt.Secret)
 
         next()
     } catch (error) {
