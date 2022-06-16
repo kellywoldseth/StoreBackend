@@ -1,5 +1,4 @@
 //@ts-ignore
-import { NoSubstitutionTemplateLiteral } from 'typescript';
 import client from '../database'
 
 export type Order = {

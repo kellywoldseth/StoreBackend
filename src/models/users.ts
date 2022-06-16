@@ -1,7 +1,6 @@
 //@ts-ignore
 import client from '../database'
 import bcrypt from 'bcrypt'
-import { isParameterPropertyDeclaration } from 'typescript';
 
 export type User = {
  id: string;
@@ -71,6 +70,7 @@ export class UserInfo{
         }
     }
 
+    //authenticate
     async authenticate(firstName: string, lastName: string, password: string): Promise<User | null> {
         const conn = await client.connect()
         const sql = 'SELECT password FROM users WHERE firstName=($1) WHERE lastName=($2)'
