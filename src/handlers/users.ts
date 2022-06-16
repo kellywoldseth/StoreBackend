@@ -18,7 +18,6 @@ res.json(user)
 
 
 
-/*ERROR---- IT WANTS USER TO HAVE AN ID*/
 const create = async (_req: Request, res: Response) => 
 {
     const user: User = {
@@ -27,6 +26,7 @@ const create = async (_req: Request, res: Response) =>
         lastName: _req.body.lastName,
         password: _req.body.password,
     }
+
     try {
         const newUser = await userDatabase.create(user)
         var token = jwt.sign({user: newUser}, process.env.TOKEN_SECRET  as jwt.Secret);
