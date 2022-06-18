@@ -12,8 +12,35 @@ describe("Testing Orders Model", () => {
         expect(cart.completedOrders).toBeDefined();
     });
 
-    /*TEST THAT ALL METHODS WORK*/
+    /*
+    it('currentOrder method should return list of current orders', async () =>{
+        //    const user1 = new User.... ???
 
-/*TO DO STILL!!!!!!!!!!!!!!*/
+        const result = await cart.currentOrder(user1);
+        expect(result).toEqual(
+            {
+            id: "1",
+            firstName: "kelly",
+            lastName: "woldseth",
+            password: "testing"
+            }
+        );
+    });*/
+
+        /*
+    it('completedOrders method should return list of current orders', async () =>{
+  //    const user1 = new User.... ???
+        const result = await cart.completedOrders(user1);
+        expect(result).toEqual(
+            {
+            id: "1",
+            firstName: "kelly",
+            lastName: "woldseth",
+            password: "testing"
+            }
+        );
+    });*/
+
+
 
 });

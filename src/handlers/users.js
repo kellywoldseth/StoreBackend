@@ -14,7 +14,6 @@ const show = async (_req, res) => {
     const user = await userDatabase.show(_req.params.id);
     res.json(user);
 };
-/*ERROR---- IT WANTS USER TO HAVE AN ID*/
 const create = async (_req, res) => {
     const user = {
         id: _req.body.id,

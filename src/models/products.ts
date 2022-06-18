@@ -2,7 +2,7 @@
 import client from '../database'
 
 export type Product = {
- id: number;
+ id: string;
  name: string;
  price: number;
  category: string;
@@ -29,7 +29,7 @@ export class ProductInventory{
         }
 
     //show
-    async show(id:string):Promise<Product[]> 
+    async show(id:string):Promise<Product> 
     {
         try
         {
@@ -47,7 +47,7 @@ export class ProductInventory{
     }
 
     //create
-    async create(p: Product):Promise<Product[]> 
+    async create(p: Product):Promise<Product> 
     {
         try
         {
