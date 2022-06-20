@@ -7,6 +7,8 @@ const userDatabase = new UserInfo()
 const index = async (_req: Request, res: Response) =>
 {
     const users = await userDatabase.index()
+    res.send("users endpoint");
+    console.log('testing');
     res.json(users)
 }
   

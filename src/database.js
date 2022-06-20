@@ -12,6 +12,7 @@ const client = new pg_1.Pool({
     host: POSTGRES_HOST,
     database: POSTGRES_DB,
     user: POSTGRES_USERNAME,
-    password: POSTGRES_PASSWORD
+    password: POSTGRES_PASSWORD,
+    port: 5432
 });
 exports.default = client;

@@ -8,6 +8,8 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userDatabase = new users_1.UserInfo();
 const index = async (_req, res) => {
     const users = await userDatabase.index();
+    res.send("users endpoint");
+    console.log('testing');
     res.json(users);
 };
 const show = async (_req, res) => {
