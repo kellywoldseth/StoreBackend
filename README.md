@@ -1,4 +1,34 @@
 # Storefront Backend Project
+# Project 2 of Udacity's Full Stack Javascript Developer Course
+# Author: Kelly Woldseth with starter code provided by Udacity
+# Date: June 2022
+## PSQL Set Up
+psql -U postgres
+CREATE test_user --- UPDATE THIS
+CREATE dev db (postgres) and test db (postgres_test)
+run db-migrate up
+
+psql -U postgres
+enter password
+
+## RUNNING UNIT TESTS
+Run "yarn test". If test needs to be run multiple times, first run "TRUNCATE TABLE products, orders RESTART IDENTITY;" in psql in \c postgres (dev db) in order to clear out the table. If you don't do this, the id (serial primary key) will continue to increment and tests will fail.
+
+## STARTING SERVER
+Run "yarn watch" and open localhost:3000.
+
+## USING ENDPOINTS
+
+
+
+
+
+
+
+
+
+
+
 
 ## Getting Started
 

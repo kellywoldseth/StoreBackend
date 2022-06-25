@@ -149,7 +149,7 @@ var ProductInventory = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "SELECT * FROM products WHERE catgory=".concat(category);
+                        sql = "SELECT * FROM products WHERE category=".concat(category);
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();

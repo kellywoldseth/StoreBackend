@@ -50,35 +50,31 @@ class ProductInventory {
         }
     }
     //optional - top 5 most popular
-    /*
-    async topFive():Promise<Product[]>
-    {
-        try
-        {
-         //@ts-ignore
-         const conn = await client.connect()
-         const sql = 'SELECT * FROM products ORDER BY numOrders DESC LIMIT 5';
-         const result = await conn.query(sql)
-         conn.release()
-         return result.rows
-        }
-        catch (err)
-        {
-         throw new Error(`Could not find top five products. Error: ${err}`)
-        }
-    }*/
-    //optional products by category
-    async productsByCategory(category) {
+    async topFive() {
         try {
             //@ts-ignore
             const conn = await database_1.default.connect();
-            const sql = `SELECT * FROM products WHERE catgory=${category}`;
+            const sql = 'SELECT * FROM products ORDER BY numorders DESC LIMIT 5';
             const result = await conn.query(sql);
             conn.release();
             return result.rows;
         }
         catch (err) {
-            throw new Error(`Could any products in that category. Error: ${err}`);
+            throw new Error(`Could not find top five products. Error: ${err}`);
+        }
+    }
+    //optional products by category
+    async productsByCategory(cat) {
+        try {
+            //@ts-ignore
+            const conn = await database_1.default.connect();
+            const sql = 'SELECT * FROM products WHERE category=($1)';
+            const result = await conn.query(sql, [cat]);
+            conn.release();
+            return result.rows;
+        }
+        catch (err) {
+            throw new Error(`Could not find any products in that category. Error: ${err}`);
         }
     }
 }

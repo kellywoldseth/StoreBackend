@@ -13,13 +13,17 @@ describe("Testing Products Model", () => {
     it('should have a create method', () => {
         expect(warehouse.create).toBeDefined();
     });
-    /*it('should have a topFive method', () =>{
+    it('should have a topFive method', () => {
         expect(warehouse.topFive).toBeDefined();
-    });*/
+    });
     it('should have a productsByCategory method', () => {
         expect(warehouse.productsByCategory).toBeDefined();
     });
-    //methods should work
+    //testing all methods
+    it('index method should return an empty list of products', async () => {
+        const result = await warehouse.index();
+        expect(result).toEqual([]);
+    });
     it('create method should return created product', async () => {
         const newProduct = await warehouse.create({
             id: 1,
@@ -28,9 +32,8 @@ describe("Testing Products Model", () => {
             category: 'produce',
             numorders: 3,
         });
-        console.log(newProduct);
         expect(newProduct).toEqual({
-            id: 34,
+            id: 1,
             name: 'bananas',
             price: 1,
             category: 'produce',
@@ -39,48 +42,127 @@ describe("Testing Products Model", () => {
         expect(newProduct.name).toEqual('bananas');
     });
     it('show method should return one product', async () => {
-        const result = await warehouse.show("25");
+        const result = await warehouse.show("1");
         expect(result).toEqual({
-            id: 25,
+            id: 1,
             name: 'bananas',
             price: 1,
             category: 'produce',
             numorders: 3
         });
     });
-    /*
-it('index method should return a list of products', async () =>{
-    const result = await warehouse.index();
-    expect(result).toEqual([
-        {
-            id: '1',
-            name: 'bananas',
-            price: 1,
-            category: 'produce'            }
-    ]);
-});
-*/
-    /*
-    it('topFive method should return a list of five products', async () =>{
+    it('show method should return undefined if product does not exist', async () => {
+        const result = await warehouse.show("16");
+        expect(result).toBeUndefined();
+    });
+    it('index method should return a list of products', async () => {
+        const result = await warehouse.index();
+        expect(result).toEqual([
+            {
+                id: 1,
+                name: 'bananas',
+                price: 1,
+                category: 'produce',
+                numorders: 3
+            }
+        ]);
+    });
+    it('topFive method should return a list of top five products ranked by numorders', async () => {
+        const prod1 = await warehouse.create({
+            id: 2,
+            name: 'bread',
+            price: 3,
+            category: 'bakery',
+            numorders: 6,
+        });
+        const prod2 = await warehouse.create({
+            id: 3,
+            name: 'milk',
+            price: 3,
+            category: 'dary',
+            numorders: 2,
+        });
+        const prod3 = await warehouse.create({
+            id: 4,
+            name: 'ice cream',
+            price: 5,
+            category: 'dairy',
+            numorders: 4,
+        });
+        const prod4 = await warehouse.create({
+            id: 5,
+            name: 'chicken',
+            price: 5,
+            category: 'meat',
+            numorders: 1,
+        });
+        const prod5 = await warehouse.create({
+            id: 6,
+            name: 'broccoli',
+            price: 4,
+            category: 'produce',
+            numorders: 5,
+        });
         const result = await warehouse.topFive();
         expect(result).toEqual([
             {
-                id: '1',
+                id: 2,
+                name: 'bread',
+                price: 3,
+                category: 'bakery',
+                numorders: 6,
+            },
+            {
+                id: 6,
+                name: 'broccoli',
+                price: 4,
+                category: 'produce',
+                numorders: 5,
+            },
+            {
+                id: 4,
+                name: 'ice cream',
+                price: 5,
+                category: 'dairy',
+                numorders: 4,
+            },
+            {
+                id: 1,
                 name: 'bananas',
                 price: 1,
-                category: 'produce'            }
+                category: 'produce',
+                numorders: 3
+            },
+            {
+                id: 3,
+                name: 'milk',
+                price: 3,
+                category: 'dary',
+                numorders: 2,
+            }
         ]);
     });
-    */
-    /*
-    it('productsByCategory method should return a list of products', async () =>{
+    it('productsByCategory method should return a list of produce products', async () => {
         const result = await warehouse.productsByCategory('produce');
         expect(result).toEqual([
             {
-                id: '1',
+                id: 1,
                 name: 'bananas',
                 price: 1,
-                category: 'produce'            }
+                category: 'produce',
+                numorders: 3
+            },
+            {
+                id: 6,
+                name: 'broccoli',
+                price: 4,
+                category: 'produce',
+                numorders: 5,
+            }
         ]);
-    });*/
+    });
+    it('productsByCategory method should return an empty list of pasta products', async () => {
+        const result = await warehouse.productsByCategory('pasta');
+        expect(result).toEqual([]);
+    });
 });
