@@ -1,3 +1,4 @@
+
 /*USERS-TABLE-UP*/
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,

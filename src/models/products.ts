@@ -2,11 +2,11 @@
 import client from '../database'
 
 export type Product = {
- id: string;
+ id: number;
  name: string;
  price: number;
  category: string;
- numOrders: number;
+ numorders: number;
 }
 
 export class ProductInventory{
@@ -53,8 +53,8 @@ export class ProductInventory{
         {
          //@ts-ignore
          const conn = await client.connect()
-         const sql = 'INSERT INTO products (name, price, category) VALUES ($1, $2, $3) RETURNING *'
-         const result = await conn.query(sql, [p.name, p.price, p.category])
+         const sql = 'INSERT INTO products (name, price, category, numorders) VALUES ($1, $2, $3, $4) RETURNING *'
+         const result = await conn.query(sql, [p.name, p.price, p.category, p.numorders])
          conn.release()
          return result.rows[0]
         }
@@ -65,6 +65,7 @@ export class ProductInventory{
     }
 
     //optional - top 5 most popular
+    /*
     async topFive():Promise<Product[]> 
     {
         try
@@ -80,7 +81,7 @@ export class ProductInventory{
         {
          throw new Error(`Could not find top five products. Error: ${err}`)
         }
-    }
+    }*/
 
     //optional products by category
     async productsByCategory(category: string):Promise<Product[]> 

@@ -26,7 +26,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - name
 - price
 - [OPTIONAL] category
-- [OPTIONAL] numOrders
+- [OPTIONAL] numOrders-created by me to help with top 5
 
 Table: products (id:serial primary key, name:varchar, price:integer, category:varchar)
 

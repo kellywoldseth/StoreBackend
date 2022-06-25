@@ -1,2 +1,0 @@
-/*USERS-TABLE-DOWN*/
-DROP TABLE users;

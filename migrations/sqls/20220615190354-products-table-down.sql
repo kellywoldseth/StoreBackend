@@ -1,2 +1,0 @@
-/*PRODUCTS-TABLE-DOWN*/
-DROP TABLE products;

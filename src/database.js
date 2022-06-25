@@ -12,7 +12,7 @@ let client = new pg_1.Pool();
 if (ENV === 'test') {
     client = new pg_1.Pool({
         host: POSTGRES_HOST,
-        database: POSTGRES_DB,
+        database: TEST_POSTGRES_DB,
         user: POSTGRES_USERNAME,
         password: POSTGRES_PASSWORD,
         port: 5432
@@ -21,7 +21,7 @@ if (ENV === 'test') {
 else if (ENV === 'dev') {
     client = new pg_1.Pool({
         host: POSTGRES_HOST,
-        database: TEST_POSTGRES_DB,
+        database: POSTGRES_DB,
         user: POSTGRES_USERNAME,
         password: POSTGRES_PASSWORD,
         port: 5432

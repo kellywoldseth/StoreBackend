@@ -4,5 +4,6 @@ CREATE TABLE products (
     name VARCHAR(255),
     price integer,
     category VARCHAR(255),
-    numOrders integer
+    numorders integer
+
 );

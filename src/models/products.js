@@ -40,8 +40,8 @@ class ProductInventory {
         try {
             //@ts-ignore
             const conn = await database_1.default.connect();
-            const sql = 'INSERT INTO products (name, price, category) VALUES ($1, $2, $3) RETURNING *';
-            const result = await conn.query(sql, [p.name, p.price, p.category]);
+            const sql = 'INSERT INTO products (name, price, category, numorders) VALUES ($1, $2, $3, $4) RETURNING *';
+            const result = await conn.query(sql, [p.name, p.price, p.category, p.numorders]);
             conn.release();
             return result.rows[0];
         }
@@ -50,19 +50,23 @@ class ProductInventory {
         }
     }
     //optional - top 5 most popular
-    async topFive() {
-        try {
-            //@ts-ignore
-            const conn = await database_1.default.connect();
-            const sql = 'SELECT * FROM products ORDER BY numOrders DESC LIMIT 5';
-            const result = await conn.query(sql);
-            conn.release();
-            return result.rows;
+    /*
+    async topFive():Promise<Product[]>
+    {
+        try
+        {
+         //@ts-ignore
+         const conn = await client.connect()
+         const sql = 'SELECT * FROM products ORDER BY numOrders DESC LIMIT 5';
+         const result = await conn.query(sql)
+         conn.release()
+         return result.rows
         }
-        catch (err) {
-            throw new Error(`Could not find top five products. Error: ${err}`);
+        catch (err)
+        {
+         throw new Error(`Could not find top five products. Error: ${err}`)
         }
-    }
+    }*/
     //optional products by category
     async productsByCategory(category) {
         try {

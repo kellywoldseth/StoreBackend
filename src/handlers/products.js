@@ -21,7 +21,7 @@ const create = async (_req, res) => {
         name: _req.body.name,
         price: _req.body.price,
         category: _req.body.category,
-        numOrders: _req.body.numOrders
+        numorders: _req.body.category
     };
     try {
         const newProduct = await warehouse.create(product);
@@ -43,10 +43,11 @@ const verifyAuthToken = (_req, res, next) => {
         res.status(401);
     }
 };
-const topFive = async (_req, res) => {
-    const products = await warehouse.topFive();
-    res.json(products);
-};
+/*
+const topFive = async (_req: Request, res: Response) => {
+    const products = await warehouse.topFive()
+    res.json(products)
+}*/
 const productsByCategory = async (_req, res) => {
     const products = await warehouse.productsByCategory(_req.params.category);
     res.json(products);
@@ -55,7 +56,7 @@ const productsRoutes = (app) => {
     app.get('/products', index);
     app.get('/products/:id', show);
     app.post('/products', verifyAuthToken, create);
-    app.get('/products', topFive);
+    //app.get('/products', topFive)
     app.get('/products/:category', productsByCategory);
 };
 exports.default = productsRoutes;
