@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import {User, UserInfo } from '../models/users'
 import jwt from 'jsonwebtoken'
-
+/*
 const userDatabase = new UserInfo()
 
 const index = async (_req: Request, res: Response) =>
@@ -72,4 +72,4 @@ const userRoutes = (app: express.Application) => {
 
 
   export default userRoutes
-
+*/

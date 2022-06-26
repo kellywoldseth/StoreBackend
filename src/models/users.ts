@@ -3,9 +3,9 @@ import client from '../database'
 import bcrypt from 'bcrypt'
 
 export type User = {
- id: string;
- firstName: string;
- lastName: string;
+ id: number;
+ firstname: string;
+ lastname: string;
  password: string;
 }
 
@@ -32,7 +32,7 @@ export class UserInfo{
    }
 
     //show
-    async show(id:string):Promise<User> 
+    async show(id:number):Promise<User> 
     {
         try
         {
@@ -56,11 +56,11 @@ export class UserInfo{
         {
          //@ts-ignore
          const conn = await client.connect()
-         const sql = 'INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING *'
+         const sql = 'INSERT INTO users (firstname, lastname, password) VALUES ($1, $2, $3) RETURNING *'
          
          
          const hash = bcrypt.hashSync(u.password + pepper, parseInt(salt));
-         const result = await conn.query(sql, [u.firstName, u.lastName, hash])
+         const result = await conn.query(sql, [u.firstname, u.lastname, hash])
          conn.release()
          return result.rows[0]
         }
@@ -73,7 +73,7 @@ export class UserInfo{
     //authenticate
     async authenticate(firstName: string, lastName: string, password: string): Promise<User | null> {
         const conn = await client.connect()
-        const sql = 'SELECT password FROM users WHERE firstName=($1) WHERE lastName=($2)'
+        const sql = 'SELECT password FROM users WHERE firstname=($1) WHERE lastname=($2)'
         const result = await conn.query(sql, [firstName, lastName])
         if(result.rows.length)
         {

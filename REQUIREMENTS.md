@@ -36,7 +36,7 @@ Table: products (id:serial primary key, name:varchar, price:integer, category:va
 - lastName
 - password
 
-Table: users (id:serial primary key, firstName:varchar, lastName:varchar, password:varchar)
+Table: users (id:serial primary key, firstname:varchar, lastname:varchar, password:varchar)
 #### Orders
 - id
 - id of each product in the order
@@ -44,5 +44,5 @@ Table: users (id:serial primary key, firstName:varchar, lastName:varchar, passwo
 - user_id
 - status of order (active or complete)
 
-Table: orders (id:serial primary key, product-id:[foreign key to products table], quantity:integer, user_id:[foreign key to users table], order_status: varchar)
+Table: orders (id:serial primary key, product_id:[foreign key to products table], quantity:integer, user_id:[foreign key to users table], order_status: varchar)
 

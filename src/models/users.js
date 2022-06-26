@@ -43,9 +43,9 @@ class UserInfo {
         try {
             //@ts-ignore
             const conn = await database_1.default.connect();
-            const sql = 'INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING *';
+            const sql = 'INSERT INTO users (firstname, lastname, password) VALUES ($1, $2, $3) RETURNING *';
             const hash = bcrypt_1.default.hashSync(u.password + pepper, parseInt(salt));
-            const result = await conn.query(sql, [u.firstName, u.lastName, hash]);
+            const result = await conn.query(sql, [u.firstname, u.lastname, hash]);
             conn.release();
             return result.rows[0];
         }
@@ -56,7 +56,7 @@ class UserInfo {
     //authenticate
     async authenticate(firstName, lastName, password) {
         const conn = await database_1.default.connect();
-        const sql = 'SELECT password FROM users WHERE firstName=($1) WHERE lastName=($2)';
+        const sql = 'SELECT password FROM users WHERE firstname=($1) WHERE lastname=($2)';
         const result = await conn.query(sql, [firstName, lastName]);
         if (result.rows.length) {
             const user = result.rows[0];

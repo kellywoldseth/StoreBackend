@@ -26,9 +26,19 @@ describe("Testing Products Model", () => {
     });
 
     //testing all methods
-it('index method should return an empty list of products', async () =>{
+
+    //user1 (kelly woldseth) and product1(muffins) were created in orderSpec file
+
+it('index method should return a list of products', async () =>{
     const result = await warehouse.index();
-    expect(result).toEqual([]);
+    expect(result).toEqual([
+        {
+            id: 1,
+            name: 'muffins',
+            price: 4,
+            category: 'bakery',
+            numorders: 1           }
+    ]);
 });
 
 it('create method should return created product', async () =>{
@@ -40,7 +50,7 @@ it('create method should return created product', async () =>{
      numorders: 3,
  });
  expect(newProduct).toEqual({
-    id: 1,
+    id: 2,
     name: 'bananas',
     price: 1,
     category: 'produce',
@@ -50,10 +60,10 @@ it('create method should return created product', async () =>{
 });
 
 it('show method should return one product', async () =>{
-    const result = await warehouse.show("1");
+    const result = await warehouse.show("2");
     expect(result).toEqual(
         {
-            id: 1,
+            id: 2,
             name: 'bananas',
             price: 1,
             category: 'produce',
@@ -68,21 +78,9 @@ it('show method should return undefined if product does not exist', async () =>{
     expect(result).toBeUndefined();
 });
 
-it('index method should return a list of products', async () =>{
-    const result = await warehouse.index();
-    expect(result).toEqual([
-        {
-            id: 1,
-            name: 'bananas',
-            price: 1,
-            category: 'produce',
-            numorders: 3            }
-    ]);
-});
-
 it('topFive method should return a list of top five products ranked by numorders', async () =>{
     const prod1 = await warehouse.create({
-        id: 2,
+        id: 3,
         name: 'bread',
         price: 3,
         category: 'bakery',
@@ -90,7 +88,7 @@ it('topFive method should return a list of top five products ranked by numorders
     });
 
     const prod2 = await warehouse.create({
-        id: 3,
+        id: 4,
         name: 'milk',
         price: 3,
         category: 'dary',
@@ -99,24 +97,14 @@ it('topFive method should return a list of top five products ranked by numorders
 
 
     const prod3 = await warehouse.create({
-        id: 4,
+        id: 5,
         name: 'ice cream',
         price: 5,
         category: 'dairy',
         numorders: 4,
     });
 
-
     const prod4 = await warehouse.create({
-        id: 5,
-        name: 'chicken',
-        price: 5,
-        category: 'meat',
-        numorders: 1,
-    });
-
-
-    const prod5 = await warehouse.create({
         id: 6,
         name: 'broccoli',
         price: 4,
@@ -127,7 +115,7 @@ it('topFive method should return a list of top five products ranked by numorders
     const result = await warehouse.topFive();
     expect(result).toEqual([
         {
-            id: 2,
+            id: 3,
             name: 'bread',
             price: 3,
             category: 'bakery',
@@ -142,20 +130,20 @@ it('topFive method should return a list of top five products ranked by numorders
             
         },
         {
-            id: 4,
+            id: 5,
             name: 'ice cream',
             price: 5,
             category: 'dairy',
             numorders: 4,
         },
         {
-            id: 1,
+            id: 2,
             name: 'bananas',
             price: 1,
             category: 'produce',
             numorders: 3                },
             {
-                id: 3,
+                id: 4,
                 name: 'milk',
                 price: 3,
                 category: 'dary',
@@ -171,7 +159,7 @@ it('productsByCategory method should return a list of produce products', async (
     const result = await warehouse.productsByCategory('produce');
     expect(result).toEqual([
         {
-            id: 1,
+            id: 2,
             name: 'bananas',
             price: 1,
             category: 'produce',
