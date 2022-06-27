@@ -54,13 +54,13 @@ class UserInfo {
         }
     }
     //authenticate
-    async authenticate(firstName, lastName, password) {
+    async authenticate(firstName, lastName, pswd) {
         const conn = await database_1.default.connect();
-        const sql = 'SELECT password FROM users WHERE firstname=($1) WHERE lastname=($2)';
+        const sql = 'SELECT password FROM users WHERE firstname=($1) AND lastname=($2)';
         const result = await conn.query(sql, [firstName, lastName]);
         if (result.rows.length) {
             const user = result.rows[0];
-            if (bcrypt_1.default.compareSync(password + pepper, user.password))
+            if (bcrypt_1.default.compareSync(pswd + pepper, user.password))
                 return user;
         }
         return null;

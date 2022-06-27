@@ -8,7 +8,7 @@ const userInfo = new UserInfo()
 const warehouse = new ProductInventory()
 
 
-describe("Testing Orders Model", () => {
+describe("Testing ORDERS Model", () => {
 
     //methods should exist
     it('should have a create method', () =>{

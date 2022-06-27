@@ -49,8 +49,6 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
             case 0: return [4 /*yield*/, userDatabase.index()];
             case 1:
                 users = _a.sent();
-                res.send("users endpoint");
-                console.log('testing');
                 res.json(users);
                 return [2 /*return*/];
         }
@@ -75,8 +73,8 @@ var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, fun
             case 0:
                 user = {
                     id: _req.body.id,
-                    firstName: _req.body.firstName,
-                    lastName: _req.body.lastName,
+                    firstname: _req.body.firstname,
+                    lastname: _req.body.lastname,
                     password: _req.body.password
                 };
                 _a.label = 1;
@@ -104,14 +102,14 @@ var authenticate = function (_req, res) { return __awaiter(void 0, void 0, void 
             case 0:
                 user = {
                     id: _req.body.id,
-                    firstName: _req.body.firstName,
-                    lastName: _req.body.lastName,
+                    firstname: _req.body.firstname,
+                    lastname: _req.body.lastname,
                     password: _req.body.password
                 };
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, userDatabase.authenticate(user.firstName, user.lastName, user.password)];
+                return [4 /*yield*/, userDatabase.authenticate(user.firstname, user.lastname, user.password)];
             case 2:
                 newUser = _a.sent();
                 token = jsonwebtoken_1["default"].sign({ user: newUser }, process.env.TOKEN_SECRET);

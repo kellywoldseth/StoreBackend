@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express'
 import {Product, ProductInventory } from '../models/products'
-import jwt from 'jsonwebtoken'
+import verifyAuthToken from '../utilities/verifyAuthToken'
 
 const warehouse = new ProductInventory()
 
@@ -17,7 +17,6 @@ res.json(product)
 }
 
 
-/*ERROR---- IT WANTS PRODUCT TO HAVE AN ID*/
 const create = async (_req: Request, res: Response) => 
 {
     const product: Product = {
@@ -25,7 +24,7 @@ const create = async (_req: Request, res: Response) =>
         name: _req.body.name,
         price: _req.body.price,
         category: _req.body.category,
-        numorders: _req.body.category
+        numorders: _req.body.numorders
 
     }
     try {
@@ -39,23 +38,12 @@ const create = async (_req: Request, res: Response) =>
 
 }
 
-const verifyAuthToken = (_req: Request, res: Response, next: any) => {
-    
-    try {
-        const authorizationHeader: string = _req.headers.authorization || ''
-        const token:string = authorizationHeader.split(' ')[1]
-        jwt.verify(token, process.env.TOKEN_SECRET as jwt.Secret)
 
-        next()
-    } catch (error) {
-        res.status(401)
-    }
-}
-/*
+
 const topFive = async (_req: Request, res: Response) => {
     const products = await warehouse.topFive()
     res.json(products)
-}*/
+}
 
 const productsByCategory = async (_req: Request, res: Response) => {
     const products = await warehouse.productsByCategory(_req.params.category)
@@ -66,8 +54,8 @@ const productsRoutes = (app: express.Application) => {
     app.get('/products', index)
     app.get('/products/:id', show)
     app.post('/products', verifyAuthToken, create)
-    //app.get('/products', topFive)
-    app.get('/products/:category', productsByCategory)
+    app.get('/products', topFive)
+    app.get('/products/category/:category', productsByCategory)
   }
 
 

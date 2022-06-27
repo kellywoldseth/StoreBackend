@@ -71,14 +71,14 @@ export class UserInfo{
     }
 
     //authenticate
-    async authenticate(firstName: string, lastName: string, password: string): Promise<User | null> {
+    async authenticate(firstName: string, lastName: string, pswd: string): Promise<User | null> {
         const conn = await client.connect()
-        const sql = 'SELECT password FROM users WHERE firstname=($1) WHERE lastname=($2)'
+        const sql = 'SELECT password FROM users WHERE firstname=($1) AND lastname=($2)'
         const result = await conn.query(sql, [firstName, lastName])
         if(result.rows.length)
         {
             const user = result.rows[0]
-            if(bcrypt.compareSync(password+pepper, user.password))
+            if(bcrypt.compareSync(pswd+pepper, user.password))
                 return user
         }
         return null

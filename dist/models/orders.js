@@ -45,8 +45,8 @@ var database_1 = __importDefault(require("../database"));
 var Cart = /** @class */ (function () {
     function Cart() {
     }
-    //current order
-    Cart.prototype.currentOrder = function (id) {
+    //create order (like an addToCart method)
+    Cart.prototype.create = function (o) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_1;
             return __generator(this, function (_a) {
@@ -56,22 +56,22 @@ var Cart = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "SELECT * FROM orders INNER JOIN users ON user.id=orders.users_id WHERE order_stats = 'active'";
-                        return [4 /*yield*/, conn.query(sql)];
+                        sql = 'INSERT INTO orders (product_id, quantity, user_id, order_status) VALUES ($1, $2, $3, $4) RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [o.product_id, o.quantity, o.user_id, o.order_status])];
                     case 2:
                         result = _a.sent();
                         conn.release();
-                        return [2 /*return*/, result.rows];
+                        return [2 /*return*/, result.rows[0]];
                     case 3:
                         err_1 = _a.sent();
-                        throw new Error("Could find current order for user ".concat(id, ". Error: ").concat(err_1));
+                        throw new Error("Could not create new order. Error: ".concat(err_1));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    //optional - completed orders
-    Cart.prototype.completedOrders = function (id) {
+    //current order
+    Cart.prototype.currentOrder = function (userId) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_2;
             return __generator(this, function (_a) {
@@ -81,15 +81,40 @@ var Cart = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "SELECT * FROM orders INNER JOIN users ON user.id=orders.users_id WHERE order_stats = 'completed'";
-                        return [4 /*yield*/, conn.query(sql)];
+                        sql = "SELECT * FROM orders WHERE user_id=($1) AND order_status='active'";
+                        return [4 /*yield*/, conn.query(sql, [userId])];
                     case 2:
                         result = _a.sent();
                         conn.release();
                         return [2 /*return*/, result.rows];
                     case 3:
                         err_2 = _a.sent();
-                        throw new Error("Could find completed orders for user ".concat(id, ". Error: ").concat(err_2));
+                        throw new Error("Could not find current order for user ".concat(userId, ". Error: ").concat(err_2));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //optional - completed orders
+    Cart.prototype.completedOrders = function (userId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, err_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = "SELECT * FROM orders WHERE user_id=($1) AND order_status='completed'";
+                        return [4 /*yield*/, conn.query(sql, [userId])];
+                    case 2:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, result.rows];
+                    case 3:
+                        err_3 = _a.sent();
+                        throw new Error("Could not find completed orders for user ".concat(userId, ". Error: ").concat(err_3));
                     case 4: return [2 /*return*/];
                 }
             });

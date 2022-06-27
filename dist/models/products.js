@@ -106,8 +106,8 @@ var ProductInventory = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'INSERT INTO products (name, price, category) VALUES ($1, $2, $3) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [p.name, p.price, p.category])];
+                        sql = 'INSERT INTO products (name, price, category, numorders) VALUES ($1, $2, $3, $4) RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [p.name, p.price, p.category, p.numorders])];
                     case 2:
                         result = _a.sent();
                         conn.release();
@@ -121,25 +121,7 @@ var ProductInventory = /** @class */ (function () {
         });
     };
     //optional - top 5 most popular
-    /*
-    async topFive():Promise<Product[]>
-    {
-        try
-        {
-         //@ts-ignore
-         const conn = await client.connect()
-         const sql = 'SELECT * FROM products ORDER BY numOrders DESC LIMIT 5';
-         const result = await conn.query(sql)
-         conn.release()
-         return result.rows
-        }
-        catch (err)
-        {
-         throw new Error(`Could not find top five products. Error: ${err}`)
-        }
-    }*/
-    //optional products by category
-    ProductInventory.prototype.productsByCategory = function (category) {
+    ProductInventory.prototype.topFive = function () {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_4;
             return __generator(this, function (_a) {
@@ -149,7 +131,7 @@ var ProductInventory = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "SELECT * FROM products WHERE category=".concat(category);
+                        sql = 'SELECT * FROM products ORDER BY numorders DESC LIMIT 5';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
@@ -157,7 +139,32 @@ var ProductInventory = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         err_4 = _a.sent();
-                        throw new Error("Could any products in that category. Error: ".concat(err_4));
+                        throw new Error("Could not find top five products. Error: ".concat(err_4));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //optional products by category
+    ProductInventory.prototype.productsByCategory = function (cat) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, err_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = 'SELECT * FROM products WHERE category=($1)';
+                        return [4 /*yield*/, conn.query(sql, [cat])];
+                    case 2:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, result.rows];
+                    case 3:
+                        err_5 = _a.sent();
+                        throw new Error("Could not find any products in that category. Error: ".concat(err_5));
                     case 4: return [2 /*return*/];
                 }
             });

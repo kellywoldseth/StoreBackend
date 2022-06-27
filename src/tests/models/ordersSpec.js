@@ -6,7 +6,7 @@ const products_1 = require("../../models/products");
 const cart = new orders_1.Cart();
 const userInfo = new users_1.UserInfo();
 const warehouse = new products_1.ProductInventory();
-describe("Testing Orders Model", () => {
+describe("Testing ORDERS Model", () => {
     //methods should exist
     it('should have a create method', () => {
         expect(userInfo.create).toBeDefined();

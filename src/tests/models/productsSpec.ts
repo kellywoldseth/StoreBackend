@@ -2,7 +2,7 @@ import {Product, ProductInventory} from '../../models/products';
 
 const warehouse = new ProductInventory()
 
-describe("Testing Products Model", () => {
+describe("Testing PRODUCTS Model", () => {
 
     //methods should be defined
     it('should have an index method', () =>{
@@ -27,13 +27,19 @@ describe("Testing Products Model", () => {
 
     //testing all methods
 
-    //user1 (kelly woldseth) and product1(muffins) were created in orderSpec file
-
+    //user1 (kelly woldseth) and muffinProduct were created in tests/models/ordersSpec file
+    //cakeProduct was created in tests/handlers/productsSpec file
 it('index method should return a list of products', async () =>{
     const result = await warehouse.index();
     expect(result).toEqual([
         {
             id: 1,
+            name: 'cake',
+            price: 3,
+            category: 'bakery',
+            numorders: 1           },
+            {
+            id: 2,
             name: 'muffins',
             price: 4,
             category: 'bakery',
@@ -50,7 +56,7 @@ it('create method should return created product', async () =>{
      numorders: 3,
  });
  expect(newProduct).toEqual({
-    id: 2,
+    id: 3,
     name: 'bananas',
     price: 1,
     category: 'produce',
@@ -60,10 +66,10 @@ it('create method should return created product', async () =>{
 });
 
 it('show method should return one product', async () =>{
-    const result = await warehouse.show("2");
+    const result = await warehouse.show("3");
     expect(result).toEqual(
         {
-            id: 2,
+            id: 3,
             name: 'bananas',
             price: 1,
             category: 'produce',
@@ -80,7 +86,7 @@ it('show method should return undefined if product does not exist', async () =>{
 
 it('topFive method should return a list of top five products ranked by numorders', async () =>{
     const prod1 = await warehouse.create({
-        id: 3,
+        id: 4,
         name: 'bread',
         price: 3,
         category: 'bakery',
@@ -88,7 +94,7 @@ it('topFive method should return a list of top five products ranked by numorders
     });
 
     const prod2 = await warehouse.create({
-        id: 4,
+        id: 5,
         name: 'milk',
         price: 3,
         category: 'dary',
@@ -97,7 +103,7 @@ it('topFive method should return a list of top five products ranked by numorders
 
 
     const prod3 = await warehouse.create({
-        id: 5,
+        id: 6,
         name: 'ice cream',
         price: 5,
         category: 'dairy',
@@ -105,7 +111,7 @@ it('topFive method should return a list of top five products ranked by numorders
     });
 
     const prod4 = await warehouse.create({
-        id: 6,
+        id: 7,
         name: 'broccoli',
         price: 4,
         category: 'produce',
@@ -115,14 +121,14 @@ it('topFive method should return a list of top five products ranked by numorders
     const result = await warehouse.topFive();
     expect(result).toEqual([
         {
-            id: 3,
+            id: 4,
             name: 'bread',
             price: 3,
             category: 'bakery',
             numorders: 6,
         },
         {
-            id: 6,
+            id: 7,
             name: 'broccoli',
             price: 4,
             category: 'produce',
@@ -130,20 +136,20 @@ it('topFive method should return a list of top five products ranked by numorders
             
         },
         {
-            id: 5,
+            id: 6,
             name: 'ice cream',
             price: 5,
             category: 'dairy',
             numorders: 4,
         },
         {
-            id: 2,
+            id: 3,
             name: 'bananas',
             price: 1,
             category: 'produce',
             numorders: 3                },
             {
-                id: 4,
+                id: 5,
                 name: 'milk',
                 price: 3,
                 category: 'dary',
@@ -159,13 +165,13 @@ it('productsByCategory method should return a list of produce products', async (
     const result = await warehouse.productsByCategory('produce');
     expect(result).toEqual([
         {
-            id: 2,
+            id: 3,
             name: 'bananas',
             price: 1,
             category: 'produce',
             numorders: 3                }, 
             {
-            id: 6,
+            id: 7,
             name: 'broccoli',
             price: 4,
             category: 'produce',

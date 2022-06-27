@@ -7,8 +7,7 @@ exports.Cart = void 0;
 //@ts-ignore
 const database_1 = __importDefault(require("../database"));
 class Cart {
-    //create order
-    //create
+    //create order (like an addToCart method)
     async create(o) {
         try {
             //@ts-ignore

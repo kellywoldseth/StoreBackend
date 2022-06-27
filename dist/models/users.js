@@ -109,9 +109,9 @@ var UserInfo = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'INSERT INTO users (firstName, lastName, password) VALUES ($1, $2, $3) RETURNING *';
+                        sql = 'INSERT INTO users (firstname, lastname, password) VALUES ($1, $2, $3) RETURNING *';
                         hash = bcrypt_1["default"].hashSync(u.password + pepper, parseInt(salt));
-                        return [4 /*yield*/, conn.query(sql, [u.firstName, u.lastName, hash])];
+                        return [4 /*yield*/, conn.query(sql, [u.firstname, u.lastname, hash])];
                     case 2:
                         result = _a.sent();
                         conn.release();
@@ -125,7 +125,7 @@ var UserInfo = /** @class */ (function () {
         });
     };
     //authenticate
-    UserInfo.prototype.authenticate = function (firstName, lastName, password) {
+    UserInfo.prototype.authenticate = function (firstName, lastName, pswd) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, user;
             return __generator(this, function (_a) {
@@ -133,13 +133,13 @@ var UserInfo = /** @class */ (function () {
                     case 0: return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT password FROM users WHERE firstName=($1) WHERE lastName=($2)';
+                        sql = 'SELECT password FROM users WHERE firstname=($1) AND lastname=($2)';
                         return [4 /*yield*/, conn.query(sql, [firstName, lastName])];
                     case 2:
                         result = _a.sent();
                         if (result.rows.length) {
                             user = result.rows[0];
-                            if (bcrypt_1["default"].compareSync(password + pepper, user.password))
+                            if (bcrypt_1["default"].compareSync(pswd + pepper, user.password))
                                 return [2 /*return*/, user];
                         }
                         return [2 /*return*/, null];

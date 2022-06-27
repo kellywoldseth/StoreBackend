@@ -40,7 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 exports.__esModule = true;
 var products_1 = require("../models/products");
-var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var verifyAuthToken_1 = __importDefault(require("../utilities/verifyAuthToken"));
 var warehouse = new products_1.ProductInventory();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var products;
@@ -66,7 +66,6 @@ var show = function (_req, res) { return __awaiter(void 0, void 0, void 0, funct
         }
     });
 }); };
-/*ERROR---- IT WANTS PRODUCT TO HAVE AN ID*/
 var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var product, newProduct, err_1;
     return __generator(this, function (_a) {
@@ -76,7 +75,8 @@ var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, fun
                     id: _req.body.id,
                     name: _req.body.name,
                     price: _req.body.price,
-                    category: _req.body.category
+                    category: _req.body.category,
+                    numorders: _req.body.numorders
                 };
                 _a.label = 1;
             case 1:
@@ -95,22 +95,18 @@ var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, fun
         }
     });
 }); };
-var verifyAuthToken = function (_req, res, next) {
-    try {
-        var authorizationHeader = _req.headers.authorization || '';
-        var token = authorizationHeader.split(' ')[1];
-        jsonwebtoken_1["default"].verify(token, process.env.TOKEN_SECRET);
-        next();
-    }
-    catch (error) {
-        res.status(401);
-    }
-};
-/*
-const topFive = async (_req: Request, res: Response) => {
-    const products = await warehouse.topFive()
-    res.json(products)
-}*/
+var topFive = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var products;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, warehouse.topFive()];
+            case 1:
+                products = _a.sent();
+                res.json(products);
+                return [2 /*return*/];
+        }
+    });
+}); };
 var productsByCategory = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var products;
     return __generator(this, function (_a) {
@@ -126,8 +122,8 @@ var productsByCategory = function (_req, res) { return __awaiter(void 0, void 0,
 var productsRoutes = function (app) {
     app.get('/products', index);
     app.get('/products/:id', show);
-    app.post('/products', verifyAuthToken, create);
-    //app.get('/products', topFive)
-    app.get('/products/:category', productsByCategory);
+    app.post('/products', verifyAuthToken_1["default"], create);
+    app.get('/products', topFive);
+    app.get('/products/category/:category', productsByCategory);
 };
 exports["default"] = productsRoutes;

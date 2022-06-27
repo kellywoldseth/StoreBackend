@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_1 = require("../models/products");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const verifyAuthToken_1 = __importDefault(require("../utilities/verifyAuthToken"));
 const warehouse = new products_1.ProductInventory();
 const index = async (_req, res) => {
     const products = await warehouse.index();
@@ -14,14 +14,13 @@ const show = async (_req, res) => {
     const product = await warehouse.show(_req.params.id);
     res.json(product);
 };
-/*ERROR---- IT WANTS PRODUCT TO HAVE AN ID*/
 const create = async (_req, res) => {
     const product = {
         id: _req.body.id,
         name: _req.body.name,
         price: _req.body.price,
         category: _req.body.category,
-        numorders: _req.body.category
+        numorders: _req.body.numorders
     };
     try {
         const newProduct = await warehouse.create(product);
@@ -32,22 +31,10 @@ const create = async (_req, res) => {
         res.json(err);
     }
 };
-const verifyAuthToken = (_req, res, next) => {
-    try {
-        const authorizationHeader = _req.headers.authorization || '';
-        const token = authorizationHeader.split(' ')[1];
-        jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
-        next();
-    }
-    catch (error) {
-        res.status(401);
-    }
+const topFive = async (_req, res) => {
+    const products = await warehouse.topFive();
+    res.json(products);
 };
-/*
-const topFive = async (_req: Request, res: Response) => {
-    const products = await warehouse.topFive()
-    res.json(products)
-}*/
 const productsByCategory = async (_req, res) => {
     const products = await warehouse.productsByCategory(_req.params.category);
     res.json(products);
@@ -55,8 +42,8 @@ const productsByCategory = async (_req, res) => {
 const productsRoutes = (app) => {
     app.get('/products', index);
     app.get('/products/:id', show);
-    app.post('/products', verifyAuthToken, create);
-    //app.get('/products', topFive)
-    app.get('/products/:category', productsByCategory);
+    app.post('/products', verifyAuthToken_1.default, create);
+    app.get('/products', topFive);
+    app.get('/products/category/:category', productsByCategory);
 };
 exports.default = productsRoutes;
