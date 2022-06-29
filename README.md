@@ -10,15 +10,24 @@ run db-migrate up
 
 psql -U postgres
 enter password
+\l to see all dbs
+\c postgres
 
 ## RUNNING UNIT TESTS
-Run "yarn test". If test needs to be run multiple times, first run "TRUNCATE TABLE products, orders RESTART IDENTITY;" in psql in \c postgres (dev db) in order to clear out the table. If you don't do this, the id (serial primary key) will continue to increment and tests will fail.
+Run "yarn test". If test needs to be run multiple times, first run "TRUNCATE TABLE products, orders, users RESTART IDENTITY;" in psql in \c postgres (dev db) in order to clear out the table. If you don't do this, the id (serial primary key) will continue to increment and tests will fail.
 
 ## STARTING SERVER
 Run "yarn watch" and open localhost:3000.
 
 ## USING ENDPOINTS
+/orders to POST
+/orders/current/:user_id to GET currentOrders 
+/orders/completed/:user_id to GET completedOrders
 
+/products to POST
+/products to GET
+/prodcuts/:id to GET one item (show)
+/products/category/:category to GET all by category
 
 
 
