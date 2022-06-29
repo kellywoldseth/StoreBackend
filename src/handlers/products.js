@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_1 = require("../models/products");
+const verifyAuthToken_1 = __importDefault(require("../utilities/verifyAuthToken"));
 const warehouse = new products_1.ProductInventory();
 const index = async (_req, res) => {
     const products = await warehouse.index();
@@ -38,8 +42,8 @@ const productsByCategory = async (_req, res) => {
 const productsRoutes = (app) => {
     app.get('/products', index);
     app.get('/products/:id', show);
-    //app.post('/products', verifyAuthToken, create)
-    app.post('/products', create);
+    app.post('/products', verifyAuthToken_1.default, create);
+    //  app.post('/products', create);
     app.get('/products/topFive', topFive);
     app.get('/products/category/:category', productsByCategory);
 };

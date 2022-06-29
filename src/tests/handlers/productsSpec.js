@@ -37,6 +37,7 @@ describe('testing PRODUCTS endpoints', () => {
      */
     let token;
     let userId;
+    //IF I DELETE THIS, ALL TESTS REGARDING USERS WILL DECREMENT AN ID SO NEED TO FIX THOSE TESTS
     beforeAll(async () => {
         const userColin = await request
             .post('/users')
@@ -48,7 +49,7 @@ describe('testing PRODUCTS endpoints', () => {
         })
             .set('Accept', 'application/json');
         token = userColin.body;
-        // console.log(token);
+        console.log(token);
     });
     // THESE TESTS PASS - COMMENTED OUT SO I CAN FOCUS ON THE OTHERS RIGHT NOW
     it('products POST request to products endpoint should work', async () => {
@@ -70,7 +71,7 @@ describe('testing PRODUCTS endpoints', () => {
         expect(response.status).toBe(200);
     });
     it('orders GET request to topFive products should work', async () => {
-        const response = await request.get('/products/topFive/');
+        const response = await request.get('/products/topFive');
         expect(response.status).toBe(200);
     });
     it('products GET request to endpoint with category parameter should work', async () => {
@@ -78,17 +79,15 @@ describe('testing PRODUCTS endpoints', () => {
         expect(response.status).toBe(200);
     });
     //time out happening because the middleware is not recognizing the token
-    /* it('products POST request to products endpoint should work', async () => {
-  
-      const response = await request.post('/products').send({
-        id:1,
-        name: 'potatoes',
-        price: 3,
-        category: 'produce',
-        numorders: 4,
-      }).set('Authorization', token);
-     const response2 = await request.get('/products').set("Accept", "application/json").set("Authorization", `Bearer ${token}`);
-      expect(response2.status).toBe(200);
-    });
-  */
+    /*it('products POST request to products endpoint should work', async () => {
+ 
+     const response = await request.post('/products').send({
+       id:1,
+       name: 'potatoes',
+       price: 3,
+       category: 'produce',
+       numorders: 4,
+     }).set('Authorization', `Bearer ${token}`);
+     expect(response.status).toBe(200);
+   })*/
 });

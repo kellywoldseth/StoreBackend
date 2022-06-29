@@ -36,6 +36,7 @@ let session = null;
   let token: string;
   let userId: string;
 
+  //IF I DELETE THIS, ALL TESTS REGARDING USERS WILL DECREMENT AN ID SO NEED TO FIX THOSE TESTS
   beforeAll(async () => {
     const userColin = await request
       .post('/users')
@@ -50,7 +51,7 @@ let session = null;
     // console.log(token);
   });
 
-  // THESE TESTS PASS - COMMENTED OUT SO I CAN FOCUS ON THE OTHERS RIGHT NOW
+  // THESE TESTS PASS
   it('products POST request to products endpoint should work', async () => {
     const response = await request.post('/products').send({
       id: 1,
@@ -83,7 +84,8 @@ let session = null;
   });
 
   //time out happening because the middleware is not recognizing the token
-  /* it('products POST request to products endpoint should work', async () => {
+  //NEED HELP HERE
+  it('products POST request to products endpoint should work', async () => {
 
     const response = await request.post('/products').send({
       id:1,
@@ -91,9 +93,7 @@ let session = null;
       price: 3,
       category: 'produce',
       numorders: 4,
-    }).set('Authorization', token);
-   const response2 = await request.get('/products').set("Accept", "application/json").set("Authorization", `Bearer ${token}`);
-    expect(response2.status).toBe(200);
-  });
-*/
+    }).set('Authorization', `Bearer ${token}`);
+    expect(response.status).toBe(200);
+  })
 });
