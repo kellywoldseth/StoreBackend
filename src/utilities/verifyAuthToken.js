@@ -15,7 +15,7 @@ const verifyAuthToken = (_req, res, next) => {
     catch (error) {
         console.log('auth token failed');
         res.status(401);
-        console.log("error: " + error);
+        console.log('error: ' + error);
     }
 };
 exports.default = verifyAuthToken;

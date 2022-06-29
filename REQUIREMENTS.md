@@ -8,41 +8,42 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index  -- 'products' [GET]
 - Show -- 'products/:id' [GET]
 - Create [token required] -- 'products' [POST]
-- [OPTIONAL] Top 5 most popular products -- 'products' [GET] 
-- [OPTIONAL] Products by category (args: product category) - 'products/:category' [GET]
+- Top 5 most popular products -- 'products/topFive' [GET] 
+- Products by category (args: product category) - 'products/category:category' [GET]
 
 #### Users
 - Index [token required] -- 'users' [GET]
 - Show [token required] -- 'users/:id' [GET]
-- Create N[token required]  -- 'users' [POST]
+- Create -- 'users' [POST]
 
 #### Orders
-- Current Order by user (args: user id)[token required]  -- 'orders/:user_id' [GET]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required] -- 'orders/:user_id' [GET]
+- Create [token required] -- 'orders' [POST]
+- Current Order by user (args: user id)[token required]  -- 'orders/current/:user_id' [GET]
+- Completed Orders by user (args: user id)[token required] -- 'orders/completed/:user_id' [GET]
 
 ## Data Shapes
 #### Product
 - id
 - name
 - price
-- [OPTIONAL] category
-- [OPTIONAL] numOrders-created by me to help with top 5
+- category
+- numorders
 
-Table: products (id:serial primary key, name:varchar, price:integer, category:varchar)
+Table: products (id:serial primary key, name:varchar, price:integer, category:varchar, numorders: integer)
 
 #### User
 - id
-- firstName
-- lastName
+- firstname
+- lastname
 - password
 
 Table: users (id:serial primary key, firstname:varchar, lastname:varchar, password:varchar)
 #### Orders
 - id
-- id of each product in the order
-- quantity of each product in the order
+- product_id
+- quantity
 - user_id
-- status of order (active or complete)
+- order_status (active or complete)
 
 Table: orders (id:serial primary key, product_id:[foreign key to products table], quantity:integer, user_id:[foreign key to users table], order_status: varchar)
 

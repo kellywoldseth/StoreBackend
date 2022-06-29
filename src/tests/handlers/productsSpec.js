@@ -38,12 +38,15 @@ describe('testing PRODUCTS endpoints', () => {
     let token;
     let userId;
     beforeAll(async () => {
-        const userColin = await request.post("/users").send({
+        const userColin = await request
+            .post('/users')
+            .send({
             id: 1,
-            firstname: "colin",
-            lastname: "fromm",
-            password: "testabc",
-        }).set("Accept", "application/json");
+            firstname: 'colin',
+            lastname: 'fromm',
+            password: 'testabc',
+        })
+            .set('Accept', 'application/json');
         token = userColin.body;
         // console.log(token);
     });
@@ -54,7 +57,7 @@ describe('testing PRODUCTS endpoints', () => {
             name: 'cake',
             price: 3,
             category: 'bakery',
-            numorders: 1
+            numorders: 1,
         });
         expect(response.status).toBe(200);
     });
@@ -76,16 +79,16 @@ describe('testing PRODUCTS endpoints', () => {
     });
     //time out happening because the middleware is not recognizing the token
     /* it('products POST request to products endpoint should work', async () => {
-   
-       const response = await request.post('/products').send({
-         id:1,
-         name: 'potatoes',
-         price: 3,
-         category: 'produce',
-         numorders: 4,
-       }).set('Authorization', token);
-      const response2 = await request.get('/products').set("Accept", "application/json").set("Authorization", `Bearer ${token}`);
-       expect(response2.status).toBe(200);
-     });
-   */
+  
+      const response = await request.post('/products').send({
+        id:1,
+        name: 'potatoes',
+        price: 3,
+        category: 'produce',
+        numorders: 4,
+      }).set('Authorization', token);
+     const response2 = await request.get('/products').set("Accept", "application/json").set("Authorization", `Bearer ${token}`);
+      expect(response2.status).toBe(200);
+    });
+  */
 });

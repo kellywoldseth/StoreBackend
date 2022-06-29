@@ -13,7 +13,12 @@ class Cart {
             //@ts-ignore
             const conn = await database_1.default.connect();
             const sql = 'INSERT INTO orders (product_id, quantity, user_id, order_status) VALUES ($1, $2, $3, $4) RETURNING *';
-            const result = await conn.query(sql, [o.product_id, o.quantity, o.user_id, o.order_status]);
+            const result = await conn.query(sql, [
+                o.product_id,
+                o.quantity,
+                o.user_id,
+                o.order_status,
+            ]);
             conn.release();
             return result.rows[0];
         }

@@ -20,7 +20,8 @@ describe('testing USERS endpoints', () => {
             password: 'test123',
         });
         const token = response.body.token;
-        const responseGetUsers = await request.get('/users')
+        const responseGetUsers = await request
+            .get('/users')
             .set('Authorization', `Bearer ${token}`);
         expect(responseGetUsers.status).toBe(200);
     });

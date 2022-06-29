@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_1 = require("../../models/products");
 const warehouse = new products_1.ProductInventory();
-describe("Testing PRODUCTS Model", () => {
+describe('Testing PRODUCTS Model', () => {
     //methods should be defined
     it('should have an index method', () => {
         expect(warehouse.index).toBeDefined();
@@ -42,7 +42,7 @@ describe("Testing PRODUCTS Model", () => {
                 name: 'cake',
                 price: 3,
                 category: 'bakery',
-                numorders: 1
+                numorders: 1,
             },
             {
                 id: 3,
@@ -50,7 +50,7 @@ describe("Testing PRODUCTS Model", () => {
                 price: 4,
                 category: 'dairy',
                 numorders: 5,
-            }
+            },
         ]);
     });
     it('create method should return created product', async () => {
@@ -66,22 +66,22 @@ describe("Testing PRODUCTS Model", () => {
             name: 'bananas',
             price: 1,
             category: 'produce',
-            numorders: 3
+            numorders: 3,
         });
         expect(newProduct.name).toEqual('bananas');
     });
     it('show method should return one product', async () => {
-        const result = await warehouse.show("4");
+        const result = await warehouse.show('4');
         expect(result).toEqual({
             id: 4,
             name: 'bananas',
             price: 1,
             category: 'produce',
-            numorders: 3
+            numorders: 3,
         });
     });
     it('show method should return undefined if product does not exist', async () => {
-        const result = await warehouse.show("16");
+        const result = await warehouse.show('16');
         expect(result).toBeUndefined();
     });
     it('topFive method should return a list of top five products ranked by numorders', async () => {
@@ -127,7 +127,7 @@ describe("Testing PRODUCTS Model", () => {
                 name: 'bananas',
                 price: 1,
                 category: 'produce',
-                numorders: 3
+                numorders: 3,
             },
             {
                 id: 6,
@@ -135,7 +135,7 @@ describe("Testing PRODUCTS Model", () => {
                 price: 3,
                 category: 'dary',
                 numorders: 2,
-            }
+            },
         ]);
     });
     it('productsByCategory method should return a list of produce products', async () => {
@@ -153,8 +153,8 @@ describe("Testing PRODUCTS Model", () => {
                 name: 'bananas',
                 price: 1,
                 category: 'produce',
-                numorders: 3
-            }
+                numorders: 3,
+            },
         ]);
     });
     it('productsByCategory method should return an empty list of pasta products', async () => {

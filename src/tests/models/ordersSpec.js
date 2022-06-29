@@ -6,7 +6,7 @@ const products_1 = require("../../models/products");
 const cart = new orders_1.Cart();
 const userInfo = new users_1.UserInfo();
 const warehouse = new products_1.ProductInventory();
-describe("Testing ORDERS Model", () => {
+describe('Testing ORDERS Model', () => {
     //methods should exist
     it('should have a create method', () => {
         expect(userInfo.create).toBeDefined();
@@ -23,7 +23,7 @@ describe("Testing ORDERS Model", () => {
             id: 1,
             firstname: 'kelly',
             lastname: 'woldseth',
-            password: 'pswd'
+            password: 'pswd',
         });
         const product1 = await warehouse.create({
             id: 3,
@@ -55,7 +55,7 @@ describe("Testing ORDERS Model", () => {
                 product_id: '1',
                 quantity: 3,
                 user_id: '1',
-                order_status: 'active'
+                order_status: 'active',
             },
             {
                 id: 2,
@@ -63,7 +63,7 @@ describe("Testing ORDERS Model", () => {
                 quantity: 5,
                 user_id: '1',
                 order_status: 'active',
-            }
+            },
         ]);
     });
     it('completedOrders method should return list of current orders', async () => {

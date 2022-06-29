@@ -16,7 +16,7 @@ const create = async (_req, res) => {
         name: _req.body.name,
         price: _req.body.price,
         category: _req.body.category,
-        numorders: _req.body.numorders
+        numorders: _req.body.numorders,
     };
     try {
         const newProduct = await warehouse.create(product);
@@ -38,9 +38,9 @@ const productsByCategory = async (_req, res) => {
 const productsRoutes = (app) => {
     app.get('/products', index);
     app.get('/products/:id', show);
-    //  app.post('/products', verifyAuthToken, create)
+    //app.post('/products', verifyAuthToken, create)
     app.post('/products', create);
-    //app.get('/products/topFive/', topFive)
+    app.get('/products/topFive', topFive);
     app.get('/products/category/:category', productsByCategory);
 };
 exports.default = productsRoutes;

@@ -41,7 +41,12 @@ class ProductInventory {
             //@ts-ignore
             const conn = await database_1.default.connect();
             const sql = 'INSERT INTO products (name, price, category, numorders) VALUES ($1, $2, $3, $4) RETURNING *';
-            const result = await conn.query(sql, [p.name, p.price, p.category, p.numorders]);
+            const result = await conn.query(sql, [
+                p.name,
+                p.price,
+                p.category,
+                p.numorders,
+            ]);
             conn.release();
             return result.rows[0];
         }

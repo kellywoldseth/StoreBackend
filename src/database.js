@@ -15,7 +15,7 @@ if (ENV === 'test') {
         database: TEST_POSTGRES_DB,
         user: POSTGRES_USERNAME,
         password: POSTGRES_PASSWORD,
-        port: 5432
+        port: 5432,
     });
 }
 else if (ENV === 'dev') {
@@ -24,7 +24,7 @@ else if (ENV === 'dev') {
         database: POSTGRES_DB,
         user: POSTGRES_USERNAME,
         password: POSTGRES_PASSWORD,
-        port: 5432
+        port: 5432,
     });
 }
 exports.default = client;

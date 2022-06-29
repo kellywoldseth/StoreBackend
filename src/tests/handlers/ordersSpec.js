@@ -17,7 +17,7 @@ describe('testing ORDERS endpoints', () => {
             id: 1,
             firstname: 'joseph',
             lastname: 'fromm',
-            password: 'testing'
+            password: 'testing',
         });
         const productApples = await request.post('/products').send({
             id: 1,
@@ -28,37 +28,37 @@ describe('testing ORDERS endpoints', () => {
         });
     });
     /*
-    
-    
-    
-      it('orders POST request endpoint should work', async () => {
-        console.log('works till here11111 ------------------');
-    
-        const response = await request.post('/orders').send(
-          {
-            id: 1,
-            product_id: 1,
-            quantity: 3,
-            user_id: 1,
-            order_status: 'active'
-          }
+  
+  
+  
+    it('orders POST request endpoint should work', async () => {
+      console.log('works till here11111 ------------------');
+  
+      const response = await request.post('/orders').send(
+        {
+          id: 1,
+          product_id: 1,
+          quantity: 3,
+          user_id: 1,
+          order_status: 'active'
+        }
+      );
+      const token = response.body.token;
+      console.log('works till here ------------------');
+      const response2 = await request.get('/orders')
+      .set(
+        'Authorization', `Bearer ${token}`
         );
-        const token = response.body.token;
-        console.log('works till here ------------------');
-        const response2 = await request.get('/orders')
-        .set(
-          'Authorization', `Bearer ${token}`
-          );
-        expect(response2.status).toBe(200);
-      });
-    */
+      expect(response2.status).toBe(200);
+    });
+  */
     it('orders POST request should work', async () => {
         const response = await request.post('/orders').send({
             id: 1,
             product_id: '1',
             quantity: 3,
             user_id: '1',
-            order_status: 'active'
+            order_status: 'active',
         });
         expect(response.status).toBe(200);
     });

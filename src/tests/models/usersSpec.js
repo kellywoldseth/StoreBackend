@@ -4,7 +4,7 @@ const users_1 = require("../../models/users");
 const pepper = process.env.BCRYPT_PASSWOORD || '';
 const salt = process.env.SALT_ROUNDS || '';
 const userInfo = new users_1.UserInfo();
-describe("Testing USERS Model", () => {
+describe('Testing USERS Model', () => {
     //user1 (joseph fromm) was created in tests/handlers/ordersSpec file
     //user2 (colin fromm) was created in tests/handlers/productsSpec file
     //user3 (leif woldseth) was created in tests/handlers/usersSpec file
@@ -19,13 +19,13 @@ describe("Testing USERS Model", () => {
     it('should have a create method', () => {
         expect(userInfo.create).toBeDefined();
     });
-    //testing methods  
+    //testing methods
     it('create method should add a user', async () => {
         const newUser = await userInfo.create({
             id: 5,
             firstname: 'lauren',
             lastname: 'fromm',
-            password: 'testing'
+            password: 'testing',
         });
         expect(newUser.id).toEqual(5);
         expect(newUser.firstname).toEqual('lauren');
