@@ -26,21 +26,21 @@ describe("Testing ORDERS Model", () => {
             password: 'pswd'
         });
         const product1 = await warehouse.create({
-            id: 1,
-            name: 'muffins',
+            id: 3,
+            name: 'eggs',
             price: 4,
-            category: 'bakery',
-            numorders: 1,
+            category: 'dairy',
+            numorders: 5,
         });
         const order1 = await cart.create({
-            id: 1,
+            id: 2,
             product_id: '1',
             quantity: 5,
             user_id: '1',
             order_status: 'active',
         });
         expect(order1).toEqual({
-            id: 1,
+            id: 2,
             product_id: '1',
             quantity: 5,
             user_id: '1',
@@ -52,6 +52,13 @@ describe("Testing ORDERS Model", () => {
         expect(result).toEqual([
             {
                 id: 1,
+                product_id: '1',
+                quantity: 3,
+                user_id: '1',
+                order_status: 'active'
+            },
+            {
+                id: 2,
                 product_id: '1',
                 quantity: 5,
                 user_id: '1',

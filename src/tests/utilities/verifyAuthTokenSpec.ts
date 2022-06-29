@@ -1,8 +1,7 @@
 import app from '../../server';
 import supertest from 'supertest';
-import jwt, { Secret } from "jsonwebtoken";
+import jwt, { Secret } from 'jsonwebtoken';
 import verifyAuthToken from '../../utilities/verifyAuthToken';
-
 
 const request = supertest(app);
 /*

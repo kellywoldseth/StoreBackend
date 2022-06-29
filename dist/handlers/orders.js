@@ -35,12 +35,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 exports.__esModule = true;
 var orders_1 = require("../models/orders");
-var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var cart = new orders_1.Cart();
 var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var order, newOrder, err_1;
@@ -71,17 +67,6 @@ var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, fun
         }
     });
 }); };
-var verifyAuthToken = function (_req, res, next) {
-    try {
-        var authorizationHeader = _req.headers.authorization || '';
-        var token = authorizationHeader.split(' ')[1];
-        jsonwebtoken_1["default"].verify(token, process.env.TOKEN_SECRET);
-        next();
-    }
-    catch (error) {
-        res.status(401);
-    }
-};
 var currentOrder = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var currOrders;
     return __generator(this, function (_a) {
@@ -107,8 +92,9 @@ var completedOrders = function (_req, res) { return __awaiter(void 0, void 0, vo
     });
 }); };
 var orderRoutes = function (app) {
-    app.post('/orders', verifyAuthToken, create);
-    app.get('/orders/:user_id', currentOrder);
-    app.get('/orders/:user_id', completedOrders);
+    // app.post('/orders', verifyAuthToken, create)
+    app.post('/orders', create);
+    app.get('/orders/current/:user_id', currentOrder);
+    app.get('/orders/completed/:user_id', completedOrders);
 };
 exports["default"] = orderRoutes;
