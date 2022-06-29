@@ -73,7 +73,7 @@ let session = null;
   });
 
   it('orders GET request to topFive products should work', async () => {
-    const response = await request.get('/products/topFive/');
+    const response = await request.get('/products/topFive');
     expect(response.status).toBe(200);
   });
 
