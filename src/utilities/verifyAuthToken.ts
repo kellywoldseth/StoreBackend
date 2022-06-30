@@ -1,16 +1,14 @@
 import express, { Request, Response } from 'express';
 import jwt, { Secret } from 'jsonwebtoken';
 
-const verifyAuthToken = (_req: Request, res: Response, next: any) => {
+const verifyAuthToken = (req: Request, res: Response, next: any): void => {
   try {
-    const authorizationHeader = _req.headers.authorization;
-    console.log('authorizationHeader: ' + authorizationHeader);
-    const token: string = authorizationHeader!.split(' ')[1];
+    const authorizationHeader = req.headers.authorization;
+    const token = (authorizationHeader as string).split(' ')[1];
     jwt.verify(token, process.env.TOKEN_SECRET as jwt.Secret);
+    next();
   } catch (error) {
-    console.log('auth token failed');
     res.status(401);
-    console.log('error: ' + error);
   }
 };
 

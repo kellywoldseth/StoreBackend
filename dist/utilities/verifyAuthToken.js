@@ -7,9 +7,10 @@ var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var verifyAuthToken = function (_req, res, next) {
     try {
         var authorizationHeader = _req.headers.authorization;
-        console.log('authorizationHeader: ' + authorizationHeader);
+        console.log('AuthorizationHeader: ' + authorizationHeader);
         var token = authorizationHeader.split(' ')[1];
         jsonwebtoken_1["default"].verify(token, process.env.TOKEN_SECRET);
+        next();
     }
     catch (error) {
         console.log('auth token failed');

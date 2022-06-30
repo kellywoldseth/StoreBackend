@@ -5,7 +5,6 @@
 
 ## TODO
 get route to end point with topFive working
-get token authentication working for products create and orders create
 check comments and formatting, run prettier
 check rubric
 update github name
@@ -40,7 +39,7 @@ Run "yarn watch" and open localhost:3000.
 /products to GET
 /products/:id to GET one item (show)
 /products/category/:category to GET all by category
-/products/topFive to GET all topFive products
+/products/topFive/dummy to GET all topFive products
 
 /users to POST
 /users to GET

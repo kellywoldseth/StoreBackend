@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const orders_1 = require("../models/orders");
+const verifyAuthToken_1 = __importDefault(require("../utilities/verifyAuthToken"));
 const cart = new orders_1.Cart();
 const create = async (_req, res) => {
     const order = {
@@ -28,8 +32,8 @@ const completedOrders = async (_req, res) => {
     res.json(pastOrders);
 };
 const orderRoutes = (app) => {
-    // app.post('/orders', verifyAuthToken, create)
-    app.post('/orders', create);
+    app.post('/orders', verifyAuthToken_1.default, create);
+    //app.post('/orders', create);
     app.get('/orders/current/:user_id', currentOrder);
     app.get('/orders/completed/:user_id', completedOrders);
 };

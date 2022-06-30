@@ -11,11 +11,11 @@ const app: express.Application = express();
 const address: string = '0.0.0.0.3000';
 
 const corsOptions = {
-    origin: "",
-    optionsSuccessStatus: 200
-}
+  origin: '',
+  optionsSuccessStatus: 200,
+};
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 productsRoutes(app);
@@ -31,4 +31,3 @@ app.listen(3000, function () {
 });
 
 export default app;
-

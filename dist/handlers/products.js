@@ -35,8 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
 var products_1 = require("../models/products");
+var verifyAuthToken_1 = __importDefault(require("../utilities/verifyAuthToken"));
 var warehouse = new products_1.ProductInventory();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var products;
@@ -118,8 +122,8 @@ var productsByCategory = function (_req, res) { return __awaiter(void 0, void 0,
 var productsRoutes = function (app) {
     app.get('/products', index);
     app.get('/products/:id', show);
-    //app.post('/products', verifyAuthToken, create) //need help with this
-    app.post('/products', create);
+    app.post('/products', verifyAuthToken_1["default"], create); //need help with this
+    //app.post('/products', create);
     app.get('/products/topFive', topFive);
     app.get('/products/category/:category', productsByCategory);
 };

@@ -33,8 +33,8 @@ const completedOrders = async (_req: Request, res: Response) => {
 };
 
 const orderRoutes = (app: express.Application) => {
-  // app.post('/orders', verifyAuthToken, create)
-  app.post('/orders', create);
+  app.post('/orders', verifyAuthToken, create);
+  //app.post('/orders', create);
 
   app.get('/orders/current/:user_id', currentOrder);
   app.get('/orders/completed/:user_id', completedOrders);

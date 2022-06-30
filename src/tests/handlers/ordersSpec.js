@@ -12,20 +12,23 @@ const request = (0, supertest_1.default)(server_1.default);
 const userInfo = new users_1.UserInfo();
 const warehouse = new products_1.ProductInventory();
 describe('testing ORDERS endpoints', () => {
+    let token;
     beforeAll(async () => {
         const userJoe = await request.post('/users').send({
             id: 1,
             firstname: 'joseph',
             lastname: 'fromm',
             password: 'testing',
-        });
+        }).set('Accept', 'application/json');
+        token = userJoe.body;
+        ;
         const productApples = await request.post('/products').send({
             id: 1,
             name: 'apples',
             price: 1,
             category: 'produce',
             numorders: 8,
-        });
+        }).set('authorization', `Bearer ${token}`);
     });
     /*
   
@@ -59,7 +62,7 @@ describe('testing ORDERS endpoints', () => {
             quantity: 3,
             user_id: '1',
             order_status: 'active',
-        });
+        }).set('authorization', `Bearer ${token}`);
         expect(response.status).toBe(200);
     });
     it('orders GET request to currentOrders endpoint with id parameter should work', async () => {

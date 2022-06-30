@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_1 = require("../models/products");
+const verifyAuthToken_1 = __importDefault(require("../utilities/verifyAuthToken"));
 const warehouse = new products_1.ProductInventory();
 const index = async (_req, res) => {
     const products = await warehouse.index();
@@ -11,6 +15,22 @@ const show = async (_req, res) => {
     res.json(product);
 };
 const create = async (_req, res) => {
+    /*
+      try{
+        const authorizationHeader = _req.headers.authorization
+        const token = authorizationHeader!.split(' ')[1]
+        console.log(token)
+        jwt.verify(token, process.env.TOKEN_SECRET as jwt.Secret);
+        console.log('success success')
+      
+      
+      }
+      catch(err){
+        res.status(401)
+        res.json(`Invalid token ${err}`)
+        console.log('failed failed failed')
+        return
+      }*/
     const product = {
         id: _req.body.id,
         name: _req.body.name,
@@ -38,9 +58,9 @@ const productsByCategory = async (_req, res) => {
 const productsRoutes = (app) => {
     app.get('/products', index);
     app.get('/products/:id', show);
-    //app.post('/products', verifyAuthToken, create) //need help with this
-    app.post('/products', create);
-    app.get('/products/topFive', topFive);
+    app.post('/products', verifyAuthToken_1.default, create);
+    //  app.post('/products', create);
+    app.get('/products/topFive/dummy', topFive);
     app.get('/products/category/:category', productsByCategory);
 };
 exports.default = productsRoutes;
