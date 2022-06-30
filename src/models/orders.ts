@@ -1,6 +1,5 @@
 //@ts-ignore
 import client from '../database';
-import { Product } from '../models/products';
 
 export type Order = {
   id: number;
@@ -48,7 +47,7 @@ export class Cart {
     }
   }
 
-  //optional - completed orders
+  //completed orders
   async completedOrders(userId: string): Promise<Order[]> {
     try {
       //@ts-ignore

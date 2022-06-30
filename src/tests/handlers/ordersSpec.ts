@@ -9,34 +9,43 @@ const request = supertest(app);
 const userInfo = new UserInfo();
 const warehouse = new ProductInventory();
 
-describe('testing ORDERS endpoints', () => {
+describe('Testing ORDERS endpoints', () => {
   let token: string;
 
   beforeAll(async () => {
-    const userJoe = await request.post('/users').send({
-      id: 1,
-      firstname: 'joseph',
-      lastname: 'fromm',
-      password: 'testing',
-    }).set('Accept', 'application/json');
-    token = userJoe.body;;
-    const productApples = await request.post('/products').send({
-      id: 1,
-      name: 'apples',
-      price: 1,
-      category: 'produce',
-      numorders: 8,
-    }).set('authorization', `Bearer ${token}`);
+    const userJoe = await request
+      .post('/users')
+      .send({
+        id: 1,
+        firstname: 'joseph',
+        lastname: 'fromm',
+        password: 'testing',
+      })
+      .set('Accept', 'application/json');
+    token = userJoe.body;
+    const productApples = await request
+      .post('/products')
+      .send({
+        id: 1,
+        name: 'apples',
+        price: 1,
+        category: 'produce',
+        numorders: 8,
+      })
+      .set('authorization', `Bearer ${token}`);
   });
-  
+
   it('orders POST request should work', async () => {
-    const response = await request.post('/orders').send({
-      id: 1,
-      product_id: '1',
-      quantity: 3,
-      user_id: '1',
-      order_status: 'active',
-    }).set('authorization', `Bearer ${token}`);
+    const response = await request
+      .post('/orders')
+      .send({
+        id: 1,
+        product_id: '1',
+        quantity: 3,
+        user_id: '1',
+        order_status: 'active',
+      })
+      .set('authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
 

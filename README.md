@@ -2,15 +2,6 @@
 # Project 2 of Udacity's Full Stack Javascript Developer Course
 # Author: Kelly Woldseth with starter code provided by Udacity
 # Date: June 2022
-
-## TODO
-get route to end point with topFive working
-check comments and formatting, run prettier
-check rubric
-update github name
-test psql set up and update readme
-
-
 ## PSQL Set Up NOT DONE WITH THIS
 psql -U postgres
 CREATE test_user --- UPDATE THIS
@@ -20,6 +11,24 @@ psql -U postgres
 enter password
 \l to see all dbs
 \c postgres
+
+## PACKAGE INSTALLATIONS
+yarn add cors
+
+
+## CREATE A .ENV FILE
+Create a .env file with the following variables:
+
+POSTGRES_USERNAME = test_user
+POSTGRES_PASSWORD = pswd123
+POSTGRES_DB = postgres
+POSTGRES_HOST = 127.0.0.1
+TEST_POSTGRES_DB = postgres_test
+ENV = dev
+
+BCRYPT_PASSWORD = mrpotatoferriswheel
+SALT_ROUNDS = 10
+TOKEN_SECRET = vista--plenty
 
 ## RUNNING UNIT TESTS
 Run "yarn test". 

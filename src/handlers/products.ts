@@ -1,7 +1,8 @@
+//Handles /products routes
+
 import express, { Request, Response } from 'express';
 import { Product, ProductInventory } from '../models/products';
 import verifyAuthToken from '../utilities/verifyAuthToken';
-import jwt, { Secret } from 'jsonwebtoken';
 
 const warehouse = new ProductInventory();
 
@@ -16,23 +17,6 @@ const show = async (_req: Request, res: Response) => {
 };
 
 const create = async (_req: Request, res: Response) => {
-  /*
-  try{
-    const authorizationHeader = _req.headers.authorization
-    const token = authorizationHeader!.split(' ')[1]
-    console.log(token)
-    jwt.verify(token, process.env.TOKEN_SECRET as jwt.Secret);
-    console.log('success success')
-  
-  
-  }
-  catch(err){
-    res.status(401)
-    res.json(`Invalid token ${err}`)
-    console.log('failed failed failed')
-    return
-  }*/
-
   const product: Product = {
     id: _req.body.id,
     name: _req.body.name,
@@ -64,7 +48,11 @@ const productsRoutes = (app: express.Application) => {
   app.get('/products', index);
   app.get('/products/:id', show);
   app.post('/products', verifyAuthToken, create);
-  //  app.post('/products', create);
+  //I added the /dummy because I am waiting for a mentor response on how to fix the route
+  //When I just have /products/topFive, it is reading topFive as a integer id like line 49 and the test fails
+  //I don't know how to make this endpoint unique without the extra /dummy part
+  //I am submitting this project anyway and hoping the reviewer can leave feedback on this portion
+  //The functionality of the endpoint is not affected but I am sure there is a better way
   app.get('/products/topFive/dummy', topFive);
   app.get('/products/category/:category', productsByCategory);
 };

@@ -1,3 +1,5 @@
+//Handles /orders routes
+
 import express, { Request, Response } from 'express';
 import { Order, Cart } from '../models/orders';
 import verifyAuthToken from '../utilities/verifyAuthToken';
@@ -14,7 +16,6 @@ const create = async (_req: Request, res: Response) => {
   };
   try {
     const newOrder = await cart.create(order);
-
     res.json(newOrder);
   } catch (err) {
     res.status(400);
@@ -34,8 +35,6 @@ const completedOrders = async (_req: Request, res: Response) => {
 
 const orderRoutes = (app: express.Application) => {
   app.post('/orders', verifyAuthToken, create);
-  //app.post('/orders', create);
-
   app.get('/orders/current/:user_id', currentOrder);
   app.get('/orders/completed/:user_id', completedOrders);
 };

@@ -54,7 +54,7 @@ class ProductInventory {
             throw new Error(`Could not create new product. Error: ${err}`);
         }
     }
-    //optional - top 5 most popular
+    //top 5 most popular
     async topFive() {
         try {
             //@ts-ignore
@@ -68,7 +68,7 @@ class ProductInventory {
             throw new Error(`Could not find top five products. Error: ${err}`);
         }
     }
-    //optional products by category
+    //products by category
     async productsByCategory(cat) {
         try {
             //@ts-ignore

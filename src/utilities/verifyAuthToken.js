@@ -7,7 +7,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const verifyAuthToken = (req, res, next) => {
     try {
         const authorizationHeader = req.headers.authorization;
-        const token = authorizationHeader.split(" ")[1];
+        const token = authorizationHeader.split(' ')[1];
         jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
         next();
     }

@@ -14,55 +14,38 @@ const warehouse = new products_1.ProductInventory();
 describe('testing ORDERS endpoints', () => {
     let token;
     beforeAll(async () => {
-        const userJoe = await request.post('/users').send({
+        const userJoe = await request
+            .post('/users')
+            .send({
             id: 1,
             firstname: 'joseph',
             lastname: 'fromm',
             password: 'testing',
-        }).set('Accept', 'application/json');
+        })
+            .set('Accept', 'application/json');
         token = userJoe.body;
-        ;
-        const productApples = await request.post('/products').send({
+        const productApples = await request
+            .post('/products')
+            .send({
             id: 1,
             name: 'apples',
             price: 1,
             category: 'produce',
             numorders: 8,
-        }).set('authorization', `Bearer ${token}`);
+        })
+            .set('authorization', `Bearer ${token}`);
     });
-    /*
-  
-  
-  
-    it('orders POST request endpoint should work', async () => {
-      console.log('works till here11111 ------------------');
-  
-      const response = await request.post('/orders').send(
-        {
-          id: 1,
-          product_id: 1,
-          quantity: 3,
-          user_id: 1,
-          order_status: 'active'
-        }
-      );
-      const token = response.body.token;
-      console.log('works till here ------------------');
-      const response2 = await request.get('/orders')
-      .set(
-        'Authorization', `Bearer ${token}`
-        );
-      expect(response2.status).toBe(200);
-    });
-  */
     it('orders POST request should work', async () => {
-        const response = await request.post('/orders').send({
+        const response = await request
+            .post('/orders')
+            .send({
             id: 1,
             product_id: '1',
             quantity: 3,
             user_id: '1',
             order_status: 'active',
-        }).set('authorization', `Bearer ${token}`);
+        })
+            .set('authorization', `Bearer ${token}`);
         expect(response.status).toBe(200);
     });
     it('orders GET request to currentOrders endpoint with id parameter should work', async () => {

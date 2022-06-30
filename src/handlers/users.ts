@@ -1,3 +1,5 @@
+//Handles /users routes
+
 import express, { Request, Response } from 'express';
 import { User, UserInfo } from '../models/users';
 import jwt from 'jsonwebtoken';
@@ -11,7 +13,6 @@ const index = async (_req: Request, res: Response) => {
 
 const show = async (_req: Request, res: Response) => {
   const user = await userDatabase.show(_req.params.id as unknown as number);
-
   res.json(user);
 };
 

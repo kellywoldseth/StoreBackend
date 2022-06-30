@@ -40,7 +40,7 @@ class Cart {
             throw new Error(`Could not find current order for user ${userId}. Error: ${err}`);
         }
     }
-    //optional - completed orders
+    //completed orders
     async completedOrders(userId) {
         try {
             //@ts-ignore

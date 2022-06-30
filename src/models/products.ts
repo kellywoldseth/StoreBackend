@@ -58,7 +58,7 @@ export class ProductInventory {
     }
   }
 
-  //optional - top 5 most popular
+  //top 5 most popular
   async topFive(): Promise<Product[]> {
     try {
       //@ts-ignore
@@ -72,7 +72,7 @@ export class ProductInventory {
     }
   }
 
-  //optional products by category
+  //products by category
   async productsByCategory(cat: string): Promise<Product[]> {
     try {
       //@ts-ignore

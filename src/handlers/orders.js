@@ -1,4 +1,5 @@
 "use strict";
+//Handles /orders routes
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -33,7 +34,6 @@ const completedOrders = async (_req, res) => {
 };
 const orderRoutes = (app) => {
     app.post('/orders', verifyAuthToken_1.default, create);
-    //app.post('/orders', create);
     app.get('/orders/current/:user_id', currentOrder);
     app.get('/orders/completed/:user_id', completedOrders);
 };

@@ -11,7 +11,6 @@ const request = (0, supertest_1.default)(server_1.default);
 const warehouse = new products_1.ProductInventory();
 describe('testing PRODUCTS endpoints', () => {
     let token;
-    let userId;
     //create a user so that a product can be created with that user's token
     beforeAll(async () => {
         const userColin = await request
@@ -26,13 +25,16 @@ describe('testing PRODUCTS endpoints', () => {
         token = userColin.body;
     });
     it('products POST request to products endpoint should work', async () => {
-        const response = await request.post('/products').send({
+        const response = await request
+            .post('/products')
+            .send({
             id: 1,
             name: 'cake',
             price: 3,
             category: 'bakery',
             numorders: 1,
-        }).set('authorization', `Bearer ${token}`);
+        })
+            .set('authorization', `Bearer ${token}`);
         expect(response.status).toBe(200);
     });
 });

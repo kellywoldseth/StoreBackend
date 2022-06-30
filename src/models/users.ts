@@ -47,7 +47,6 @@ export class UserInfo {
       const conn = await client.connect();
       const sql =
         'INSERT INTO users (firstname, lastname, password) VALUES ($1, $2, $3) RETURNING *';
-
       const hash = bcrypt.hashSync(u.password + pepper, parseInt(salt));
       const result = await conn.query(sql, [u.firstname, u.lastname, hash]);
       conn.release();

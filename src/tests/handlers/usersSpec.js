@@ -22,11 +22,11 @@ describe('testing USERS endpoints', () => {
         const token = response.body.token;
         const responseGetUsers = await request
             .get('/users')
-            .set('Authorization', `Bearer ${token}`);
+            .set('authorization', `Bearer ${token}`);
         expect(responseGetUsers.status).toBe(200);
     });
     it('users SHOW request to endpoint with id parameter should work', async () => {
-        const response2 = await request.get('/users/1');
-        expect(response2.status).toBe(200);
+        const response = await request.get('/users/1');
+        expect(response.status).toBe(200);
     });
 });
