@@ -16,7 +16,6 @@ test psql set up and update readme
 psql -U postgres
 CREATE test_user --- UPDATE THIS
 CREATE dev db (postgres) and test db (postgres_test)
-run db-migrate up
 
 psql -U postgres
 enter password
