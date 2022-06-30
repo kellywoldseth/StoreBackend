@@ -2,6 +2,9 @@
 # Project 2 of Udacity's Full Stack Javascript Developer Course
 # Author: Kelly Woldseth with starter code provided by Udacity
 # Date: June 2022
+
+## Note to reviewer
+I asked for help on the topFive route unique URL but a mentor got back to me and that is now resolved.
 ## PSQL Set Up
 psql -U postgres
 CREATE USER test_user WITH PASSWORD '[you choose a password]';
@@ -52,3 +55,4 @@ Run "yarn watch" and open localhost:3000.
 /users to POST
 /users to GET
 /users/:id to GET by id
+
