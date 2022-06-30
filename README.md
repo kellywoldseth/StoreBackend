@@ -2,25 +2,24 @@
 # Project 2 of Udacity's Full Stack Javascript Developer Course
 # Author: Kelly Woldseth with starter code provided by Udacity
 # Date: June 2022
-## PSQL Set Up NOT DONE WITH THIS
+## PSQL Set Up
 psql -U postgres
-CREATE test_user --- UPDATE THIS
-CREATE dev db (postgres) and test db (postgres_test)
-
-psql -U postgres
-enter password
-\l to see all dbs
+CREATE USER test_user WITH PASSWORD '[you choose a password]';
+CREATE DATABASE postgres;
+CREATE DATABSE postgres_test;
 \c postgres
+GRANT ALL PRIVILEGES ON DATABASE postgres TO test_user;
+\c postgres_test
+GRANT ALL PRIVILEGES ON DATABASE postgres_test TO test_user;
 
 ## PACKAGE INSTALLATIONS
-yarn add cors
-
+npm install
 
 ## CREATE A .ENV FILE
 Create a .env file with the following variables:
 
 POSTGRES_USERNAME = test_user
-POSTGRES_PASSWORD = pswd123
+POSTGRES_PASSWORD = [whatever password you chose in psql set up]
 POSTGRES_DB = postgres
 POSTGRES_HOST = 127.0.0.1
 TEST_POSTGRES_DB = postgres_test
