@@ -107,7 +107,12 @@ var ProductInventory = /** @class */ (function () {
                     case 1:
                         conn = _a.sent();
                         sql = 'INSERT INTO products (name, price, category, numorders) VALUES ($1, $2, $3, $4) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [p.name, p.price, p.category, p.numorders])];
+                        return [4 /*yield*/, conn.query(sql, [
+                                p.name,
+                                p.price,
+                                p.category,
+                                p.numorders,
+                            ])];
                     case 2:
                         result = _a.sent();
                         conn.release();

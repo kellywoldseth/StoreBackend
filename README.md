@@ -6,7 +6,6 @@
 ## TODO
 get route to end point with topFive working
 get token authentication working for products create and orders create
-check why postgres is default database instead of postgres_test
 check comments and formatting, run prettier
 check rubric
 update github name

@@ -57,7 +57,12 @@ var Cart = /** @class */ (function () {
                     case 1:
                         conn = _a.sent();
                         sql = 'INSERT INTO orders (product_id, quantity, user_id, order_status) VALUES ($1, $2, $3, $4) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [o.product_id, o.quantity, o.user_id, o.order_status])];
+                        return [4 /*yield*/, conn.query(sql, [
+                                o.product_id,
+                                o.quantity,
+                                o.user_id,
+                                o.order_status,
+                            ])];
                     case 2:
                         result = _a.sent();
                         conn.release();

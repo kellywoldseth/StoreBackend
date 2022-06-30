@@ -49,9 +49,9 @@ describe('testing PRODUCTS endpoints', () => {
         })
             .set('Accept', 'application/json');
         token = userColin.body;
-        console.log(token);
+        // console.log(token);
     });
-    // THESE TESTS PASS - COMMENTED OUT SO I CAN FOCUS ON THE OTHERS RIGHT NOW
+    // THESE TESTS PASS
     it('products POST request to products endpoint should work', async () => {
         const response = await request.post('/products').send({
             id: 1,
@@ -79,15 +79,16 @@ describe('testing PRODUCTS endpoints', () => {
         expect(response.status).toBe(200);
     });
     //time out happening because the middleware is not recognizing the token
+    //NEED HELP HERE
     /*it('products POST request to products endpoint should work', async () => {
- 
-     const response = await request.post('/products').send({
-       id:1,
-       name: 'potatoes',
-       price: 3,
-       category: 'produce',
-       numorders: 4,
-     }).set('Authorization', `Bearer ${token}`);
-     expect(response.status).toBe(200);
-   })*/
+  
+      const response = await request.post('/products').send({
+        id:1,
+        name: 'potatoes',
+        price: 3,
+        category: 'produce',
+        numorders: 4,
+      }).set('Authorization', `Bearer ${token}`);
+      expect(response.status).toBe(200);
+    })*/
 });

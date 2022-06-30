@@ -10,12 +10,11 @@ var verifyAuthToken = function (_req, res, next) {
         console.log('authorizationHeader: ' + authorizationHeader);
         var token = authorizationHeader.split(' ')[1];
         jsonwebtoken_1["default"].verify(token, process.env.TOKEN_SECRET);
-        next();
     }
     catch (error) {
         console.log('auth token failed');
         res.status(401);
-        console.log("error: " + error);
+        console.log('error: ' + error);
     }
 };
 exports["default"] = verifyAuthToken;

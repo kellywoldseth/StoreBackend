@@ -118,9 +118,9 @@ var productsByCategory = function (_req, res) { return __awaiter(void 0, void 0,
 var productsRoutes = function (app) {
     app.get('/products', index);
     app.get('/products/:id', show);
-    //  app.post('/products', verifyAuthToken, create)
+    //app.post('/products', verifyAuthToken, create) //need help with this
     app.post('/products', create);
-    //app.get('/products/topFive/', topFive)
+    app.get('/products/topFive', topFive);
     app.get('/products/category/:category', productsByCategory);
 };
 exports["default"] = productsRoutes;

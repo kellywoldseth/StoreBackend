@@ -9,8 +9,7 @@ const verifyAuthToken = (_req, res, next) => {
         const authorizationHeader = _req.headers.authorization;
         console.log('authorizationHeader: ' + authorizationHeader);
         const token = authorizationHeader.split(' ')[1];
-        jsonwebtoken_1.default.verify('jG81bxwGADjlM6xJZa2itLrqRqU9Kc8o9bW6r3tNYxc', process.env.TOKEN_SECRET);
-        next();
+        jsonwebtoken_1.default.verify(token, process.env.TOKEN_SECRET);
     }
     catch (error) {
         console.log('auth token failed');

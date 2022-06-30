@@ -45,7 +45,7 @@ const productsRoutes = (app: express.Application) => {
   app.get('/products', index);
   app.get('/products/:id', show);
  app.post('/products', verifyAuthToken, create) //need help with this
-  //app.post('/products', create);
+ // app.post('/products', create);
   app.get('/products/topFive', topFive)
   app.get('/products/category/:category', productsByCategory);
 };
