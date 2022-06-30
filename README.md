@@ -28,6 +28,7 @@ Run "yarn test".
 
 If test needs to be run multiple times, first run "TRUNCATE TABLE products, orders, users RESTART IDENTITY;" in psql in \c postgres (dev db) in order to clear out the table. If you don't do this, the id (serial primary key) will continue to increment and tests will fail.
 
+Note: I am developing on a mac and had to add the word "export" at the beginning of my test script in package.json. Windows users should delete that word or change it to set.
 ## STARTING SERVER
 Run "yarn watch" and open localhost:3000.
 
