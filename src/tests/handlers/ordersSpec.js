@@ -11,7 +11,7 @@ const products_1 = require("../../models/products");
 const request = (0, supertest_1.default)(server_1.default);
 const userInfo = new users_1.UserInfo();
 const warehouse = new products_1.ProductInventory();
-describe('testing ORDERS endpoints', () => {
+describe('Testing ORDERS endpoints', () => {
     let token;
     beforeAll(async () => {
         const userJoe = await request

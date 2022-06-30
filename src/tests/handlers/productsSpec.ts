@@ -45,12 +45,12 @@ it('products GET request to products endpoint should work', async () => {
 });
 
 it('products GET request to endpoint with id parameter should work', async () => {
-  const response = await request.get('/products/1');
+  const response = await request.get('/products/id/1');
   expect(response.status).toBe(200);
 });
 
 it('orders GET request to topFive products should work', async () => {
-  const response = await request.get('/products/topFive/dummy');
+  const response = await request.get('/products/topFive');
   expect(response.status).toBe(200);
 });
 

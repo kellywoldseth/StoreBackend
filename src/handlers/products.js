@@ -42,9 +42,9 @@ const productsByCategory = async (_req, res) => {
 };
 const productsRoutes = (app) => {
     app.get('/products', index);
-    app.get('/products/:id', show);
+    app.get('/products/id/:id', show);
     app.post('/products', verifyAuthToken_1.default, create);
-    app.get('/products/topFive/dummy', topFive);
+    app.get('/products/topFive', topFive);
     app.get('/products/category/:category', productsByCategory);
 };
 exports.default = productsRoutes;

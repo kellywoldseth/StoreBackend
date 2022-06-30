@@ -9,7 +9,7 @@ const supertest_1 = __importDefault(require("supertest"));
 const products_1 = require("../../models/products");
 const request = (0, supertest_1.default)(server_1.default);
 const warehouse = new products_1.ProductInventory();
-describe('testing PRODUCTS endpoints', () => {
+describe('Testing PRODUCTS endpoints', () => {
     let token;
     //create a user so that a product can be created with that user's token
     beforeAll(async () => {
@@ -43,11 +43,11 @@ it('products GET request to products endpoint should work', async () => {
     expect(response.status).toBe(200);
 });
 it('products GET request to endpoint with id parameter should work', async () => {
-    const response = await request.get('/products/1');
+    const response = await request.get('/products/id/1');
     expect(response.status).toBe(200);
 });
 it('orders GET request to topFive products should work', async () => {
-    const response = await request.get('/products/topFive/dummy');
+    const response = await request.get('/products/topFive');
     expect(response.status).toBe(200);
 });
 it('products GET request to endpoint with category parameter should work', async () => {

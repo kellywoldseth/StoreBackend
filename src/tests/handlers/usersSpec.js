@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const server_1 = __importDefault(require("../../server"));
 const supertest_1 = __importDefault(require("supertest"));
 const request = (0, supertest_1.default)(server_1.default);
-describe('testing USERS endpoints', () => {
+describe('Testing USERS endpoints', () => {
     it('users GET request to users endpoint should work', async () => {
         const response = await request.get('/users');
         expect(response.status).toBe(200);

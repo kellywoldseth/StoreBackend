@@ -46,14 +46,9 @@ const productsByCategory = async (_req: Request, res: Response) => {
 
 const productsRoutes = (app: express.Application) => {
   app.get('/products', index);
-  app.get('/products/:id', show);
+  app.get('/products/id/:id', show);
   app.post('/products', verifyAuthToken, create);
-  //I added the /dummy because I am waiting for a mentor response on how to fix the route
-  //When I just have /products/topFive, it is reading topFive as a integer id like line 49 and the test fails
-  //I don't know how to make this endpoint unique without the extra /dummy part
-  //I am submitting this project anyway and hoping the reviewer can leave feedback on this portion
-  //The functionality of the endpoint is not affected but I am sure there is a better way
-  app.get('/products/topFive/dummy', topFive);
+  app.get('/products/topFive', topFive);
   app.get('/products/category/:category', productsByCategory);
 };
 
