@@ -12,18 +12,27 @@ class Cart {
         try {
             //@ts-ignore
             const conn = await database_1.default.connect();
-            const sql = 'INSERT INTO orders (product_id, quantity, user_id, order_status) VALUES ($1, $2, $3, $4) RETURNING *';
-            const result = await conn.query(sql, [
-                o.product_id,
-                o.quantity,
-                o.user_id,
-                o.order_status,
-            ]);
+            const sql = 'INSERT INTO orders (user_id, order_status) VALUES ($1, $2) RETURNING *';
+            const result = await conn.query(sql, [o.user_id, o.order_status]);
             conn.release();
             return result.rows[0];
         }
         catch (err) {
             throw new Error(`Could not create new order. Error: ${err}`);
+        }
+    }
+    //add product
+    async addProduct(quantity, orderId, productId) {
+        try {
+            //@ts-ignore
+            const conn = await database_1.default.connect();
+            const sql = 'INSERT INTO orders_products (quantity, order_id, product_id) VALUES ($1, $2, $3) RETURNING *';
+            const result = await conn.query(sql, [quantity, orderId, productId]);
+            conn.release();
+            return result.rows[0];
+        }
+        catch (err) {
+            throw new Error(`Could not add product ${productId} to order ${orderId}. Error: ${err}`);
         }
     }
     //current order

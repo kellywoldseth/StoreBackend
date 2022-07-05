@@ -42,7 +42,8 @@ Note: I am developing on a mac and had to add the word "export" at the beginning
 Run "yarn watch" and open localhost:3000.
 
 ## ENDPOINTS
-/orders to POST
+/orders to POST new order
+/orders/:id/products to POST (addProduct)
 /orders/current/:user_id to GET currentOrders 
 /orders/completed/:user_id to GET completedOrders
 

@@ -125,7 +125,7 @@ var ProductInventory = /** @class */ (function () {
             });
         });
     };
-    //optional - top 5 most popular
+    //top 5 most popular
     ProductInventory.prototype.topFive = function () {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_4;
@@ -150,7 +150,7 @@ var ProductInventory = /** @class */ (function () {
             });
         });
     };
-    //optional products by category
+    //products by category
     ProductInventory.prototype.productsByCategory = function (cat) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, err_5;

@@ -6,7 +6,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 ## API Endpoints
 #### Products
 - Index  -- 'products' [GET]
-- Show -- 'products/:id' [GET]
+- Show -- 'products/id/:id' [GET]
 - Create [token required] -- 'products' [POST]
 - Top 5 most popular products -- 'products/topFive' [GET] 
 - Products by category (args: product category) - 'products/category:category' [GET]
@@ -18,6 +18,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Orders
 - Create [token required] -- 'orders' [POST]
+- addProduct [token required] -- 'orders/:id/products' [POST]
 - Current Order by user (args: user id)[token required]  -- 'orders/current/:user_id' [GET]
 - Completed Orders by user (args: user id)[token required] -- 'orders/completed/:user_id' [GET]
 
@@ -40,10 +41,15 @@ Table: products (id:serial primary key, name:varchar, price:integer, category:va
 Table: users (id:serial primary key, firstname:varchar, lastname:varchar, password:varchar)
 #### Orders
 - id
-- product_id
-- quantity
 - user_id
 - order_status (active or complete)
 
-Table: orders (id:serial primary key, product_id:[foreign key to products table], quantity:integer, user_id:[foreign key to users table], order_status: varchar)
+Table: orders (id:serial primary key, user_id:[foreign key to users table], order_status: varchar)
 
+### Orders_Products
+- id
+- quantity
+- order_id
+- product_id 
+
+Table: orders_products (id:serial primary key, quantity: integer, order_id:[foreign key to orders table], product_id: [foreign key to products table]

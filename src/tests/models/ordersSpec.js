@@ -11,6 +11,9 @@ describe('Testing ORDERS Model', () => {
     it('should have a create method', () => {
         expect(userInfo.create).toBeDefined();
     });
+    it('should have an addProduct method', () => {
+        expect(cart.addProduct).toBeDefined();
+    });
     it('should have an currentOrder method', () => {
         expect(cart.currentOrder).toBeDefined();
     });
@@ -34,17 +37,23 @@ describe('Testing ORDERS Model', () => {
         });
         const order1 = await cart.create({
             id: 2,
-            product_id: '1',
-            quantity: 5,
             user_id: '1',
             order_status: 'active',
         });
         expect(order1).toEqual({
             id: 2,
-            product_id: '1',
-            quantity: 5,
             user_id: '1',
             order_status: 'active',
+        });
+    });
+    //addProduct called once already in tests/handlers/orderSpec
+    it('addProduct method should add row to orders_products table', async () => {
+        const result = await cart.addProduct(4, '1', '1');
+        expect(result).toEqual({
+            id: 2,
+            quantity: 4,
+            order_id: '1',
+            product_id: '1',
         });
     });
     it('currentOrder method should return list of current orders', async () => {
@@ -52,15 +61,11 @@ describe('Testing ORDERS Model', () => {
         expect(result).toEqual([
             {
                 id: 1,
-                product_id: '1',
-                quantity: 3,
                 user_id: '1',
                 order_status: 'active',
             },
             {
                 id: 2,
-                product_id: '1',
-                quantity: 5,
                 user_id: '1',
                 order_status: 'active',
             },

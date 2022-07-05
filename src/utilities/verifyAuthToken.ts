@@ -1,11 +1,11 @@
-import express, { Request, Response } from 'express';
-import jwt, { Secret } from 'jsonwebtoken';
+import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 
-//any is used here because that was what the example used. 
+//any is used here because that was what the example used.
 //I don't have any better explanation than that.
-const verifyAuthToken = (req: Request, res: Response, next: any): void => {
+const verifyAuthToken = (_req: Request, res: Response, next: any): void => {
   try {
-    const authorizationHeader = req.headers.authorization;
+    const authorizationHeader = _req.headers.authorization;
     const token: string = (authorizationHeader as string).split(' ')[1];
     jwt.verify(token, process.env.TOKEN_SECRET as jwt.Secret);
     next();

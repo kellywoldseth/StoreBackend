@@ -35,15 +35,23 @@ describe('Testing ORDERS endpoints', () => {
         })
             .set('authorization', `Bearer ${token}`);
     });
-    it('orders POST request should work', async () => {
+    it('orders POST request to CREATE order should work', async () => {
         const response = await request
             .post('/orders')
             .send({
             id: 1,
-            product_id: '1',
-            quantity: 3,
             user_id: '1',
             order_status: 'active',
+        })
+            .set('authorization', `Bearer ${token}`);
+        expect(response.status).toBe(200);
+    });
+    it('orders POST request to ADD PRODUCT TO ORDER should work', async () => {
+        const response = await request
+            .post('/orders/1/products')
+            .send({
+            product_id: '1',
+            quantity: '20',
         })
             .set('authorization', `Bearer ${token}`);
         expect(response.status).toBe(200);

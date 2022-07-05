@@ -1,4 +1,5 @@
 "use strict";
+//Handles /products routes
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -121,9 +122,8 @@ var productsByCategory = function (_req, res) { return __awaiter(void 0, void 0,
 }); };
 var productsRoutes = function (app) {
     app.get('/products', index);
-    app.get('/products/:id', show);
-    app.post('/products', verifyAuthToken_1["default"], create); //need help with this
-    //app.post('/products', create);
+    app.get('/products/id/:id', show);
+    app.post('/products', verifyAuthToken_1["default"], create);
     app.get('/products/topFive', topFive);
     app.get('/products/category/:category', productsByCategory);
 };

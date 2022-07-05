@@ -56,10 +56,8 @@ var Cart = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'INSERT INTO orders (product_id, quantity, user_id, order_status) VALUES ($1, $2, $3, $4) RETURNING *';
+                        sql = 'INSERT INTO orders (user_id, order_status) VALUES ($1, $2) RETURNING *';
                         return [4 /*yield*/, conn.query(sql, [
-                                o.product_id,
-                                o.quantity,
                                 o.user_id,
                                 o.order_status,
                             ])];
@@ -75,10 +73,39 @@ var Cart = /** @class */ (function () {
             });
         });
     };
+    //add product
+    Cart.prototype.addProduct = function (quantity, orderId, productId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = 'INSERT INTO orders_products (quantity, order_id, product_id) VALUES ($1, $2, $3) RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [
+                                quantity,
+                                orderId,
+                                productId
+                            ])];
+                    case 2:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, result.rows[0]];
+                    case 3:
+                        err_2 = _a.sent();
+                        throw new Error("Could not add product ".concat(productId, " to order ").concat(orderId, ". Error: ").concat(err_2));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     //current order
     Cart.prototype.currentOrder = function (userId) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, err_2;
+            var conn, sql, result, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -93,17 +120,17 @@ var Cart = /** @class */ (function () {
                         conn.release();
                         return [2 /*return*/, result.rows];
                     case 3:
-                        err_2 = _a.sent();
-                        throw new Error("Could not find current order for user ".concat(userId, ". Error: ").concat(err_2));
+                        err_3 = _a.sent();
+                        throw new Error("Could not find current order for user ".concat(userId, ". Error: ").concat(err_3));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    //optional - completed orders
+    //completed orders
     Cart.prototype.completedOrders = function (userId) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, err_3;
+            var conn, sql, result, err_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -118,8 +145,8 @@ var Cart = /** @class */ (function () {
                         conn.release();
                         return [2 /*return*/, result.rows];
                     case 3:
-                        err_3 = _a.sent();
-                        throw new Error("Could not find completed orders for user ".concat(userId, ". Error: ").concat(err_3));
+                        err_4 = _a.sent();
+                        throw new Error("Could not find completed orders for user ".concat(userId, ". Error: ").concat(err_4));
                     case 4: return [2 /*return*/];
                 }
             });

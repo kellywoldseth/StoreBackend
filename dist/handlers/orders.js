@@ -1,4 +1,5 @@
 "use strict";
+//Handles /orders routes
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -45,8 +46,6 @@ var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, fun
             case 0:
                 order = {
                     id: _req.body.id,
-                    product_id: _req.body.product_id,
-                    quantity: _req.body.quantity,
                     user_id: _req.body.user_id,
                     order_status: _req.body.order_status
                 };
@@ -62,6 +61,31 @@ var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, fun
                 err_1 = _a.sent();
                 res.status(400);
                 res.json(err_1);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+var addProduct = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var orderId, productId, quantity, addedProduct, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                orderId = _req.params.id;
+                productId = _req.body.product_id;
+                quantity = parseInt(_req.body.quantity);
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, cart.addProduct(quantity, orderId, productId)];
+            case 2:
+                addedProduct = _a.sent();
+                res.json(addedProduct);
+                return [3 /*break*/, 4];
+            case 3:
+                err_2 = _a.sent();
+                res.status(400);
+                res.json(err_2);
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
@@ -92,9 +116,11 @@ var completedOrders = function (_req, res) { return __awaiter(void 0, void 0, vo
     });
 }); };
 var orderRoutes = function (app) {
-    // app.post('/orders', verifyAuthToken, create)
+    // app.post('/orders', verifyAuthToken, create);
     app.post('/orders', create);
     app.get('/orders/current/:user_id', currentOrder);
     app.get('/orders/completed/:user_id', completedOrders);
+    app.post('/orders/:id/products', addProduct);
+    //app.post('/orders/:id/products', verifyAuthToken, addProduct);
 };
 exports["default"] = orderRoutes;
