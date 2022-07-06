@@ -22,7 +22,9 @@ describe('Testing USERS endpoints', () => {
   });
 
   it('users GET request to users endpoint should work', async () => {
-    const response = await request.get('/users').set('authorization', `Bearer ${token}`);
+    const response = await request
+      .get('/users')
+      .set('authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
 
@@ -37,7 +39,9 @@ describe('Testing USERS endpoints', () => {
   });
 
   it('users SHOW request to endpoint with id parameter should work', async () => {
-    const response = await request.get('/users/1').set('authorization', `Bearer ${token}`);
+    const response = await request
+      .get('/users/1')
+      .set('authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
 });

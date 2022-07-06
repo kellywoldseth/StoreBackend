@@ -26,7 +26,7 @@ describe('Testing PRODUCTS Model', () => {
 
   //testing all methods
 
-//user1 (joseph fromm) was created in tests/handlers/ordersSpec file
+  //user1 (joseph fromm) was created in tests/handlers/ordersSpec file
   //user2 (colin fromm) was created in tests/handlers/productsSpec file
   //user3 (erin craven) was created in tests/handlers/usersSpec file
   //user4 (leif woldseth) was created in tests/handlers/usersSpec file

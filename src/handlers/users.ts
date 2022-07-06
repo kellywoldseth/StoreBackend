@@ -8,13 +8,23 @@ import verifyAuthToken from '../utilities/verifyAuthToken';
 const userDatabase = new UserInfo();
 
 const index = async (_req: Request, res: Response) => {
-  const users = await userDatabase.index();
-  res.json(users);
+  try {
+    const users = await userDatabase.index();
+    res.json(users);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const show = async (_req: Request, res: Response) => {
-  const user = await userDatabase.show(_req.params.id as unknown as number);
-  res.json(user);
+  try {
+    const user = await userDatabase.show(_req.params.id as unknown as number);
+    res.json(user);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const create = async (_req: Request, res: Response) => {

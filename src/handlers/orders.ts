@@ -36,20 +36,29 @@ const addProduct = async (_req: Request, res: Response) => {
 };
 
 const currentOrder = async (_req: Request, res: Response) => {
-  const currOrders = await cart.currentOrder(_req.params.user_id);
-  res.json(currOrders);
+  try {
+    const currOrders = await cart.currentOrder(_req.params.user_id);
+    res.json(currOrders);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const completedOrders = async (_req: Request, res: Response) => {
-  const pastOrders = await cart.completedOrders(_req.params.user_id);
-  res.json(pastOrders);
+  try {
+    const pastOrders = await cart.completedOrders(_req.params.user_id);
+    res.json(pastOrders);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const orderRoutes = (app: express.Application) => {
   app.post('/orders', verifyAuthToken, create);
   app.get('/orders/current/:user_id', currentOrder);
   app.get('/orders/completed/:user_id', completedOrders);
-  app.post('/orders/:id/products', addProduct);
   app.post('/orders/:id/products', verifyAuthToken, addProduct);
 };
 

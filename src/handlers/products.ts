@@ -7,13 +7,23 @@ import verifyAuthToken from '../utilities/verifyAuthToken';
 const warehouse = new ProductInventory();
 
 const index = async (_req: Request, res: Response) => {
-  const products = await warehouse.index();
-  res.json(products);
+  try {
+    const products = await warehouse.index();
+    res.json(products);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const show = async (_req: Request, res: Response) => {
-  const product = await warehouse.show(_req.params.id);
-  res.json(product);
+  try {
+    const product = await warehouse.show(_req.params.id);
+    res.json(product);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const create = async (_req: Request, res: Response) => {
@@ -35,13 +45,23 @@ const create = async (_req: Request, res: Response) => {
 };
 
 const topFive = async (_req: Request, res: Response) => {
-  const products = await warehouse.topFive();
-  res.json(products);
+  try {
+    const products = await warehouse.topFive();
+    res.json(products);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const productsByCategory = async (_req: Request, res: Response) => {
-  const products = await warehouse.productsByCategory(_req.params.category);
-  res.json(products);
+  try {
+    const products = await warehouse.productsByCategory(_req.params.category);
+    res.json(products);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const productsRoutes = (app: express.Application) => {

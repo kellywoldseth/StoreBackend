@@ -23,7 +23,7 @@ describe('Testing ORDERS Model', () => {
     expect(cart.completedOrders).toBeDefined();
   });
 
-    //testing all methods
+  //testing all methods
 
   //user1 (joseph fromm) was created in tests/handlers/ordersSpec file
   //user2 (colin fromm) was created in tests/handlers/productsSpec file
