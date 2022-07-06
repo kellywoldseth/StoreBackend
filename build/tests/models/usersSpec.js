@@ -7,8 +7,13 @@ const userInfo = new users_1.UserInfo();
 describe('Testing USERS Model', () => {
     //user1 (joseph fromm) was created in tests/handlers/ordersSpec file
     //user2 (colin fromm) was created in tests/handlers/productsSpec file
-    //user3 (leif woldseth) was created in tests/handlers/usersSpec file
-    //user4 (kelly woldseth) was created in tests/models/ordersSpec file
+    //user3 (erin craven) was created in tests/handlers/usersSpec file
+    //user4 (leif woldseth) was created in tests/handlers/usersSpec file
+    //user5 (kelly woldseth) was created in tests/models/ordersSpec file
+    //applesProduct(id=1) was created in tests/handlers/ordersSpec file
+    //cakeProduct(id=2) was created in tests/handlers/productsSpec file
+    //eggsProduct(id=3) was created in tests/models/ordersSpec file
+    //order1 was created in tests/handlers/orderSpec file
     //methods should exist
     it('should have an index method', () => {
         expect(userInfo.index).toBeDefined();
@@ -22,12 +27,12 @@ describe('Testing USERS Model', () => {
     //testing methods
     it('create method should add a user', async () => {
         const newUser = await userInfo.create({
-            id: 5,
+            id: 6,
             firstname: 'lauren',
             lastname: 'fromm',
             password: 'testing',
         });
-        expect(newUser.id).toEqual(5);
+        expect(newUser.id).toEqual(6);
         expect(newUser.firstname).toEqual('lauren');
         expect(newUser.lastname).toEqual('fromm');
     });

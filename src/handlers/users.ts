@@ -3,6 +3,7 @@
 import express, { Request, Response } from 'express';
 import { User, UserInfo } from '../models/users';
 import jwt from 'jsonwebtoken';
+import verifyAuthToken from '../utilities/verifyAuthToken';
 
 const userDatabase = new UserInfo();
 
@@ -61,8 +62,8 @@ const authenticate = async (_req: Request, res: Response) => {
 };
 
 const userRoutes = (app: express.Application) => {
-  app.get('/users', index);
-  app.get('/users/:id', show);
+  app.get('/users', verifyAuthToken, index);
+  app.get('/users/:id', verifyAuthToken, show);
   app.post('/users', create);
 };
 

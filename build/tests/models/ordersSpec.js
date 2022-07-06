@@ -23,12 +23,13 @@ describe('Testing ORDERS Model', () => {
     //testing all methods
     //user1 (joseph fromm) was created in tests/handlers/ordersSpec file
     //user2 (colin fromm) was created in tests/handlers/productsSpec file
-    //user3 (leif woldseth) was created in tests/handlers/usersSpec file
-    //user4 (kelly woldseth) was created in tests/models/ordersSpec file
+    //user3 (erin craven) was created in tests/handlers/usersSpec file
+    //user4 (leif woldseth) was created in tests/handlers/usersSpec file
+    //user5 (kelly woldseth) was created in tests/models/ordersSpec file
     //applesProduct(id=1) was created in tests/handlers/ordersSpec file
     //cakeProduct(id=2) was created in tests/handlers/productsSpec file
     //eggsProduct(id=3) was created in tests/models/ordersSpec file
-    //order 1 was created in tests/handlers/orderSpec file
+    //order1 was created in tests/handlers/orderSpec file
     //methods should work
     it('create method should return created order', async () => {
         const user1 = await userInfo.create({

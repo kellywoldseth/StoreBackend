@@ -6,6 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const users_1 = require("../models/users");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const verifyAuthToken_1 = __importDefault(require("../utilities/verifyAuthToken"));
 const userDatabase = new users_1.UserInfo();
 const index = async (_req, res) => {
     const users = await userDatabase.index();
@@ -50,8 +51,8 @@ const authenticate = async (_req, res) => {
     }
 };
 const userRoutes = (app) => {
-    app.get('/users', index);
-    app.get('/users/:id', show);
+    app.get('/users', verifyAuthToken_1.default, index);
+    app.get('/users/:id', verifyAuthToken_1.default, show);
     app.post('/users', create);
 };
 exports.default = userRoutes;
