@@ -57,6 +57,7 @@ describe('Testing ORDERS endpoints', () => {
       .set('authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
+
   it('orders GET request to currentOrders endpoint with id parameter should work', async () => {
     const response = await request.get('/orders/current/1');
     expect(response.status).toBe(200);

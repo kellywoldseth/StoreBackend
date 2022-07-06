@@ -27,6 +27,7 @@ describe('Testing PRODUCTS Model', () => {
     //applesProduct(id=1) was created in tests/handlers/ordersSpec file
     //cakeProduct(id=2) was created in tests/handlers/productsSpec file
     //eggsProduct(id=3) was created in tests/models/ordersSpec file
+    //order 1 was created in tests/handlers/orderSpec file
     it('index method should return a list of products', async () => {
         const result = await warehouse.index();
         expect(result).toEqual([

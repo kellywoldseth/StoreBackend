@@ -40,6 +40,7 @@ If test needs to be run multiple times, first run "TRUNCATE TABLE products, orde
 Note: I am developing on a mac and had to add the word "export" at the beginning of my test script in package.json. Windows users should delete that word or change it to set.
 ## STARTING SERVER
 Run "yarn watch" and open localhost:3000.
+Port: 5432
 
 ## ENDPOINTS
 /orders to POST new order
@@ -49,9 +50,9 @@ Run "yarn watch" and open localhost:3000.
 
 /products to POST
 /products to GET
-/products/:id to GET one item (show)
+/products/id/:id to GET one item (show)
 /products/category/:category to GET all by category
-/products/topFive/dummy to GET all topFive products
+/products/topFive to GET all topFive products
 
 /users to POST
 /users to GET
