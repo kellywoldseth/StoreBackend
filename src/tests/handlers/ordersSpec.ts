@@ -59,12 +59,12 @@ describe('Testing ORDERS endpoints', () => {
   });
 
   it('orders GET request to currentOrders endpoint with id parameter should work', async () => {
-    const response = await request.get('/orders/current/1');
+    const response = await request.get('/orders/current/1').set('authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
 
   it('orders GET request to completedOrders endpoint with id parameter should work', async () => {
-    const response = await request.get('/orders/completed/1');
+    const response = await request.get('/orders/completed/1').set('authorization', `Bearer ${token}`);
     expect(response.status).toBe(200);
   });
 });
